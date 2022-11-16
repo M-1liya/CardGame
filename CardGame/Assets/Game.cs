@@ -7,15 +7,18 @@ using CardGame.Assets.nsDeck;
 
 namespace CardGame.Assets
 {
-    static class Game
+    public class Game
     {
-        static int currentRound = 1;
-        static Deck DeckP1, Deck2;
-        static int ElexirP1, ElexirP2;
+        public int currentRound = 1;
+        static Deck deck = new Deck();
 
-        public static void Start()
+        public void Start(Player P1, Player P2)
         {
-            DeckP1 = new Deck();
+            for(int i = 0; i < 5; i++)
+            {
+                P1.handCard.Add(deck.GetCard());
+                P2.handCard.Add(deck.GetCard());
+            }
         }
     }
 }

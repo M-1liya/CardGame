@@ -9,7 +9,8 @@ namespace CardGame.Assets.nsDeck
     public abstract class Card
     {
         public int cost;
-        public enum TypeHero { Dragon, Princess, Shrek, Osel };
+        public string name;
+        public enum TypeHero { Dragon, Princess, Shrek, Osel, Knight };
         public enum TypePotion { Health, Damage };
     }
 }
