@@ -16,10 +16,13 @@ namespace CardGame
             //MessageBox.Show(z.GetType().ToString());
             game.Start(P1, P2);
             Round—ounter.Text = $"–‡ÛÌ‰ {game.currentRound.ToString()}"; 
+
             foreach(Card card in P1.handCard)
             {
                 HandDeckP1.Items.Add($"{card.cost} {card.name} ¿:{1} HP:{1}");
             }
+
+
             foreach (Card card in P2.handCard)
             {
                 HandDeckP2.Items.Add($"{card.cost} {card.name} ¿:{1} HP:{1}");

@@ -10,14 +10,15 @@ namespace CardGame.Assets.nsDeck
     {
         private int _hp;
         private int _damage;
-        static string _name;
-        TypeHero typeHero;
-        public Hero(int cardCost, int cardDamage, string nameHero, int cartHP = 100)
+        private TypeHero typeHero;
+        //private string _name = "";
+        public Hero(TypeCard typeCard, int cardCost, int cardDamage, TypeHero typeHero, int cartHP)
         {
-            this.name = nameHero;
-            this.cost = cardCost;
+            this.typeHero = typeHero;
+            this._cost = cardCost;
             this._damage = cardDamage;
             this._hp = cartHP;
+            this._typeCard = typeCard;
         }
 
         public int HP
@@ -26,5 +27,7 @@ namespace CardGame.Assets.nsDeck
         }
         public int Damage => _damage;
         public string Name => _name;
+        public int Cost => _cost;
+        public TypeHero GetTypeHero => typeHero;
     }
 }

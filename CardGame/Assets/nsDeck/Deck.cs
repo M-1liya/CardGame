@@ -10,12 +10,15 @@ namespace CardGame.Assets.nsDeck
     {
         int counter;
         public List<Card> cards = new List<Card>()
-        { 
-            new Hero(4, 2, "Рыцарь", 5), 
-            new Hero(7, 4, "Дракон", 10), 
-            new Hero(3, 3, "Шрек", 3), 
-            new Hero(2, 5, "Осел", 2),
-            new Potion(2, 2, "Зелье лечения") 
+        {
+            //Герои
+            new Hero(Card.TypeCard.Hero, 4, 2, Card.TypeHero.Knight, 5),
+            new Hero(Card.TypeCard.Hero, 7, 4, Card.TypeHero.Dragon, 10),
+            new Hero(Card.TypeCard.Hero, 3, 3, Card.TypeHero.Shrek, 3),
+            new Hero(Card.TypeCard.Hero, 2, 5, Card.TypeHero.Osel, 2),
+            //Зелья
+            new Potion(Card.TypeCard.Potion, 2, 2, Card.TypePotion.Health),
+            new Potion(Card.TypeCard.Potion, 3, 3, Card.TypePotion.Damage)
         };
         Random random = new Random();
         public Deck()

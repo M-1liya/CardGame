@@ -23,9 +23,20 @@ namespace CardGame.Assets
         public void RerenderList(ComboBox comboBox, Player P)
         {
             comboBox.Items.Clear();
-            foreach(Card card in P.handCard)
+
+            foreach (Card card in P.handCard)
             {
-                comboBox.Items.Add($"{card.cost} {card.name} А:{1} HP:{1}");
+                if(card.GetTypeCard == Card.TypeCard.Hero)
+                {
+                    Hero hero = (Hero)card;
+                    comboBox.Items.Add($"{hero.Cost} {hero.GetTypeHero} А:{hero.Damage} HP:{hero.HP}");
+                }
+                if(card.GetTypeCard == Card.TypeCard.Potion)
+                {
+                    Potion potion = (Potion)card;
+                    comboBox.Items.Add($"{potion.Cost} {potion.GetTypePotion} Eff: {potion.Effect}");
+                }
+
             }
             
         }

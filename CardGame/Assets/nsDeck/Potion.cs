@@ -8,12 +8,19 @@ namespace CardGame.Assets.nsDeck
 {
     public class Potion : Card
     {
-        public int effect;
-        public Potion(int cartCost, int cartEffect, string potionName)
+        private int _effect;
+        private TypePotion _typePotion;
+        public Potion(TypeCard typeCard ,int cartCost, int cartEffect, TypePotion typePotion)
         {
-            this.cost = cartCost;
-            this.effect = cartEffect;
-            this.name = potionName;
+            this._cost = cartCost;
+            this._effect = cartEffect;
+            //this._name = potionName;
+            this._typeCard = typeCard;
+            this._typePotion = typePotion;
         }
+
+        public TypePotion GetTypePotion => _typePotion;
+        public int Cost => _cost;
+        public int Effect => _effect;
     }
 }
