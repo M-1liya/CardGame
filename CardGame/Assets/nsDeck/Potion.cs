@@ -9,10 +9,11 @@ namespace CardGame.Assets.nsDeck
     public class Potion : Card
     {
         public int effect;
-        public Potion(int cartCost, int cartEffect, TypePotion typePotion)
+        public Potion(int cartCost, int cartEffect, string potionName)
         {
             this.cost = cartCost;
             this.effect = cartEffect;
+            this.name = potionName;
         }
     }
 }

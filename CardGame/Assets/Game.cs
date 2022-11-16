@@ -20,5 +20,14 @@ namespace CardGame.Assets
                 P2.handCard.Add(deck.GetCard());
             }
         }
+        public void RerenderList(ComboBox comboBox, Player P)
+        {
+            comboBox.Items.Clear();
+            foreach(Card card in P.handCard)
+            {
+                comboBox.Items.Add($"{card.cost} {card.name} А:{1} HP:{1}");
+            }
+            
+        }
     }
 }

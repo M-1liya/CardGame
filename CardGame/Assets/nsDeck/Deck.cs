@@ -9,7 +9,14 @@ namespace CardGame.Assets.nsDeck
     public class Deck
     {
         int counter;
-        List<Card> cards = new List<Card>() { new Hero(3, 2, "Рыцарь", 5), new Hero(7, 4, "Дракон", 10), new Hero(3, 3, "Шрек", 3), new Hero(3, 5, "Осел", 2) };
+        public List<Card> cards = new List<Card>()
+        { 
+            new Hero(4, 2, "Рыцарь", 5), 
+            new Hero(7, 4, "Дракон", 10), 
+            new Hero(3, 3, "Шрек", 3), 
+            new Hero(2, 5, "Осел", 2),
+            new Potion(2, 2, "Зелье лечения") 
+        };
         Random random = new Random();
         public Deck()
         {
