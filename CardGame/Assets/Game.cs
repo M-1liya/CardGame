@@ -24,17 +24,17 @@ namespace CardGame.Assets
         {
             comboBox.Items.Clear();
 
-            foreach (Card card in P.handCard)
+            foreach (Card card in P.handCard)   //Определяем тип карты, и выводим её св-ва на экран
             {
                 if(card.GetTypeCard == Card.TypeCard.Hero)
                 {
                     Hero hero = (Hero)card;
-                    comboBox.Items.Add($"{hero.Cost} {hero.GetTypeHero} А:{hero.Damage} HP:{hero.HP}");
+                    comboBox.Items.Add(hero.ToString());
                 }
                 if(card.GetTypeCard == Card.TypeCard.Potion)
                 {
                     Potion potion = (Potion)card;
-                    comboBox.Items.Add($"{potion.Cost} {potion.GetTypePotion} Eff: {potion.Effect}");
+                    comboBox.Items.Add(potion.ToString());
                 }
 
             }

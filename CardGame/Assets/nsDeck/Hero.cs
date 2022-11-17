@@ -29,5 +29,8 @@ namespace CardGame.Assets.nsDeck
         public string Name => _name;
         public int Cost => _cost;
         public TypeHero GetTypeHero => typeHero;
+
+        public override string ToString() => $"({Cost}) {GetTypeHero} Атака: {Damage}  HP: {HP}";
+
     }
 }

@@ -19,5 +19,7 @@ namespace CardGame.Assets.nsDeck
 
         public TypeCard GetTypeCard => _typeCard;
 
+        abstract public override string ToString();
+
     }
 }
