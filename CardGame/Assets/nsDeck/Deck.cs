@@ -15,7 +15,7 @@ namespace CardGame.Assets.nsDeck
             new Hero(Card.TypeCard.Hero, 4, 2, Card.TypeHero.Knight, 5),
             new Hero(Card.TypeCard.Hero, 7, 4, Card.TypeHero.Dragon, 10),
             new Hero(Card.TypeCard.Hero, 3, 3, Card.TypeHero.Shrek, 3),
-            new Hero(Card.TypeCard.Hero, 2, 5, Card.TypeHero.Osel, 2),
+            new Hero(Card.TypeCard.Hero, 2, 5, Card.TypeHero.Donkey, 2),
             //Зелья
             new Potion(Card.TypeCard.Potion, 2, 2, Card.TypePotion.Health),
             new Potion(Card.TypeCard.Potion, 3, 3, Card.TypePotion.Damage)
