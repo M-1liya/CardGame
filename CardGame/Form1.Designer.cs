@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.HandDeckP1 = new System.Windows.Forms.ComboBox();
             this.HandDeckP2 = new System.Windows.Forms.ComboBox();
             this.ImageP1 = new System.Windows.Forms.PictureBox();
@@ -73,7 +74,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::CardGame.Properties.Resources.p2;
-            this.pictureBox1.Location = new System.Drawing.Point(733, 51);
+            this.pictureBox1.Location = new System.Drawing.Point(721, 40);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(85, 84);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -142,8 +143,9 @@
             this.Controls.Add(this.ImageP1);
             this.Controls.Add(this.HandDeckP2);
             this.Controls.Add(this.HandDeckP1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Shrek : Card game";
             ((System.ComponentModel.ISupportInitialize)(this.ImageP1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

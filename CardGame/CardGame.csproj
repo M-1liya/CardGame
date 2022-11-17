@@ -6,10 +6,16 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <PackageIcon>ShrekJPG-transformed.png</PackageIcon>
+    <ApplicationIcon>images\ShrekICO.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Assets\NewFile1.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="images\ShrekICO.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +31,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="images\ShrekJPG-transformed.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
