@@ -23,38 +23,14 @@ namespace CardGame
             //Первый игрок
             foreach(Card card in P1.handCard)
             {
-
                 HandDeckP1.Items.Add(card.ToString());
 
-                    //if (card.GetTypeCard == Card.TypeCard.Hero)
-                    //{
-                    //    Hero hero = (Hero)card;
-                    //    HandDeckP1.Items.Add(hero.ToString());
-                    //}
-                    //if (card.GetTypeCard == Card.TypeCard.Potion)
-                    //{
-                    //    Potion potion = (Potion)card;
-                    //    HandDeckP1.Items.Add(potion.ToString());
-                    //}
             }
 
             //Второй игрок
             foreach (Card card in P2.handCard)   //Как я хорош, как я хорош. Одна строчка вместо кучи кода
             {
-
                 HandDeckP2.Items.Add(card.ToString());
-
-
-                //if (card.GetTypeCard == Card.TypeCard.Hero)
-                //{
-                //    Hero hero = (Hero)card;
-                //    HandDeckP1.Items.Add($"{hero.Cost} {hero.GetTypeHero} А:{hero.Damage} HP:{hero.HP}");
-                //}
-                //if (card.GetTypeCard == Card.TypeCard.Potion)
-                //{
-                //    Potion potion = (Potion)card;
-                //    HandDeckP1.Items.Add($"{potion.Cost} {potion.GetTypePotion} Эффект:{potion.Effect}");
-                //}
             }
         }
 
