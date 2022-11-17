@@ -20,25 +20,35 @@ namespace CardGame.Assets
                 P2.handCard.Add(deck.GetCard());
             }
         }
-        public void RerenderList(ComboBox comboBox, Player P)
+        public void RenderList(ComboBox comboBox, List<Card> cardList)
         {
             comboBox.Items.Clear();
 
-            foreach (Card card in P.handCard)
+            foreach (Card card in cardList)
             {
-                if(card.GetTypeCard == Card.TypeCard.Hero)
+                if(card is Hero)
                 {
                     Hero hero = (Hero)card;
-                    comboBox.Items.Add($"{hero.Cost} {hero.GetTypeHero} А:{hero.Damage} HP:{hero.HP}");
+                    comboBox.Items.Add($"{hero.Cost} {hero.name} А:{hero.Damage} HP:{hero.HP}");
                 }
-                if(card.GetTypeCard == Card.TypeCard.Potion)
+                else
                 {
                     Potion potion = (Potion)card;
-                    comboBox.Items.Add($"{potion.Cost} {potion.GetTypePotion} Eff: {potion.Effect}");
+                    if (potion.Effect > 0)
+                        comboBox.Items.Add($"{potion.Cost} {potion.name} H: {potion.Effect}");
+                    else
+                        comboBox.Items.Add($"{potion.Cost} {potion.name} A: {Math.Abs(potion.Effect)}");
                 }
+            }  
+        }
 
+        public void SetStartCard(Player P, ComboBox comboBox, List<Card> cardInHandP)
+        {
+            foreach (Card card in P.handCard)
+            {
+                cardInHandP.Add(card);
             }
-            
+            this.RenderList(comboBox, cardInHandP);
         }
     }
 }

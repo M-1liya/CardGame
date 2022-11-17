@@ -11,7 +11,6 @@ namespace CardGame.Assets.nsDeck
         private int _hp;
         private int _damage;
         private TypeHero typeHero;
-        //private string _name = "";
         public Hero(TypeCard typeCard, int cardCost, int cardDamage, TypeHero typeHero, int cartHP)
         {
             this.typeHero = typeHero;
@@ -19,6 +18,33 @@ namespace CardGame.Assets.nsDeck
             this._damage = cardDamage;
             this._hp = cartHP;
             this._typeCard = typeCard;
+            switch (typeHero)
+            {
+                case TypeHero.Dragon:
+                    {
+                        this.name = "Дракон"; break;
+                    }
+                case TypeHero.Knight:
+                    {
+                        this.name = "Рыцарь"; break;
+                    }
+                case TypeHero.Osel:
+                    {
+                        this.name = "Осел"; break;
+                    }
+                case TypeHero.Shrek:
+                    {
+                        this.name = "Шрек"; break;
+                    }
+                case TypeHero.Princess:
+                    {
+                        this.name = "Принцесса"; break;
+                    }
+                default:
+                    {
+                        this.name = "НЕ ОБРАБОТАНЫЙ ТИП"; break;
+                    }
+            }
         }
 
         public int HP

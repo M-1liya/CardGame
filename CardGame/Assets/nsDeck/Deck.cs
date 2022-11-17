@@ -18,7 +18,7 @@ namespace CardGame.Assets.nsDeck
             new Hero(Card.TypeCard.Hero, 2, 5, Card.TypeHero.Osel, 2),
             //Зелья
             new Potion(Card.TypeCard.Potion, 2, 2, Card.TypePotion.Health),
-            new Potion(Card.TypeCard.Potion, 3, 3, Card.TypePotion.Damage)
+            new Potion(Card.TypeCard.Potion, 3, -3, Card.TypePotion.Damage)
         };
         Random random = new Random();
         public Deck()

@@ -16,8 +16,8 @@ namespace CardGame.Assets.nsDeck
         public enum TypeHero { Dragon, Princess, Shrek, Osel, Knight }
         public enum TypePotion { Health, Damage }
 
-
         public TypeCard GetTypeCard => _typeCard;
-
+        public string name { get { return _name; } set { _name = value; } }
+        public int cost => _cost;
     }
 }
