@@ -10,27 +10,26 @@ namespace CardGame.Assets.nsDeck
     {
         private int _hp;
         private int _damage;
-        private TypeHero typeHero;
-        //private string _name = "";
+        private TypeHero _typeHero;
         public Hero(TypeCard typeCard, int cardCost, int cardDamage, TypeHero typeHero, int cartHP)
         {
-            this.typeHero = typeHero;
+            this._typeHero = typeHero;
             this._cost = cardCost;
             this._damage = cardDamage;
             this._hp = cartHP;
             this._typeCard = typeCard;
         }
 
-        public int HP
+        public int HP // Нужно поменять на heatpoint
         {
             get => _hp; set => _hp = value;
         }
-        public int Damage => _damage;
-        public string Name => _name;
-        public int Cost => _cost;
-        public TypeHero GetTypeHero => typeHero;
-
-        public override string ToString() => $"({Cost}) {GetTypeHero} Атака: {Damage}  HP: {HP}";
+        public enum TypeHero { Dragon, Princess, Shrek, Donkey, Knight, osel }
+        public int getDamage => _damage;
+        public string getName => _name;
+        public int getCost => _cost;
+        public TypeHero GetTypeHero => _typeHero;
+        public override string ToString() => $"({getCost}) {GetTypeHero} Атака: {getDamage}  HP: {HP}";
 
     }
 }

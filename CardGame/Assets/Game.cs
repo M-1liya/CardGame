@@ -9,9 +9,13 @@ namespace CardGame.Assets
 {
     public class Game
     {
-        public int currentRound = 1;
+        private int currentRound;
         static Deck deck = new Deck();
 
+        public Game(int currentRound = 1)
+        {
+            this.currentRound = currentRound;
+        }
         public void Start(Player P1, Player P2)
         {
             for(int i = 0; i < 5; i++)
@@ -26,7 +30,8 @@ namespace CardGame.Assets
 
             foreach (Card card in P.handCard)   //Определяем тип карты, и выводим её св-ва на экран
             {
-                if(card.GetTypeCard == Card.TypeCard.Hero)
+
+                if (card.GetTypeCard == Card.TypeCard.Hero)
                 {
                     Hero hero = (Hero)card;
                     comboBox.Items.Add(hero.ToString());
@@ -40,5 +45,8 @@ namespace CardGame.Assets
             }
             
         }
+        public int getCurrentRound => currentRound;
+        public void setCurrentRound(int currentRound) { this.currentRound = currentRound; }
     }
 }
+

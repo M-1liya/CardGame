@@ -9,16 +9,16 @@ namespace CardGame.Assets.nsDeck
     public class Deck
     {
         int counter;
-        public List<Card> cards = new List<Card>()
+        private List<Card> cards = new List<Card>()
         {
             //Герои
-            new Hero(Card.TypeCard.Hero, 4, 2, Card.TypeHero.Knight, 5),
-            new Hero(Card.TypeCard.Hero, 7, 4, Card.TypeHero.Dragon, 10),
-            new Hero(Card.TypeCard.Hero, 3, 3, Card.TypeHero.Shrek, 3),
-            new Hero(Card.TypeCard.Hero, 2, 5, Card.TypeHero.Osel, 2),
+            new Hero(Card.TypeCard.Hero, 4, 2, Hero.TypeHero.Knight, 5),
+            new Hero(Card.TypeCard.Hero, 7, 4, Hero.TypeHero.Dragon, 10),
+            new Hero(Card.TypeCard.Hero, 3, 3, Hero.TypeHero.Shrek, 3),
+            new Hero(Card.TypeCard.Hero, 2, 5, Hero.TypeHero.Donkey, 2),
             //Зелья
-            new Potion(Card.TypeCard.Potion, 2, 2, Card.TypePotion.Health),
-            new Potion(Card.TypeCard.Potion, 3, 3, Card.TypePotion.Damage)
+            new Potion(Card.TypeCard.Potion, 2, 2, Potion.TypePotion.Health),
+            new Potion(Card.TypeCard.Potion, 3, 3, Potion.TypePotion.Damage)
         };
         Random random = new Random();
         public Deck()

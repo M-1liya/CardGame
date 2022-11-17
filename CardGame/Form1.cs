@@ -16,7 +16,7 @@ namespace CardGame
 
             //Присоздании окна начинается игра
             game.Start(P1, P2);
-            RoundСounter.Text = $"Раунд {game.currentRound.ToString()}"; 
+            RoundСounter.Text = $"Раунд {game.getCurrentRound.ToString()}"; 
 
 
                                         /* Выдаём игрокам карты*/
