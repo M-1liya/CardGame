@@ -11,12 +11,11 @@ namespace CardGame.Assets.nsDeck
     {
         private int _effect;
         private TypePotion _typePotion;
+
         public Potion(TypeCard typeCard ,int cartCost, int cartEffect, TypePotion typePotion)
         {
             this._effect = cartEffect;
-            if(typePotion == Card.TypePotion.Damage && cartEffect > 0) this._effect = -cartEffect;
-
-            //this._name = potionName;
+            if(typePotion == Potion.TypePotion.Damage && cartEffect > 0) this._effect = -cartEffect;
 
             this._cost = cartCost;
             this._typeCard = typeCard;
@@ -24,13 +23,14 @@ namespace CardGame.Assets.nsDeck
 
         }
 
+        public enum TypePotion { Health, Damage }
         public TypePotion GetTypePotion => _typePotion;
         public int Cost => _cost;
         public int Effect => _effect;
 
         public override string ToString() 
         {
-            if (GetTypePotion == Card.TypePotion.Damage)
+            if (GetTypePotion == Potion.TypePotion.Damage)
                 return $"({Cost}) {GetTypePotion} Эффект: {Effect} HP";
             else
                 return $"({Cost}) {GetTypePotion} Эффект: +{Effect} HP";
