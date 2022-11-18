@@ -49,7 +49,8 @@ namespace CardGame
             string keyPlayer = HandDeck.Name.Replace("HandDeck", "");
             var DropOnTheFieldButton = this.Controls["DropOnTheFieldButton" + keyPlayer]; 
             var selectedItemFromHandDeck = (HandDeck.SelectedItem as dynamic).Value; // <=> HandDeck.selectedItem
-            DropOnTheFieldButton.Enabled = (selectedItemFromHandDeck is Hero) ? true : false;
+            DropOnTheFieldButton.Enabled = selectedItemFromHandDeck.isHero(selectedItemFromHandDeck);
+
         }
         private void DropOnTheFieldButton_Click(object sender, EventArgs e)
         {
