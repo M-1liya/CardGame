@@ -21,14 +21,7 @@ namespace CardGame.Assets.nsDeck
             new Potion(Card.TypeCard.Potion, 3, 3, Potion.TypePotion.Damage)
         };
         Random random = new Random();
-        public Deck()
-        {
-            this.counter = cards.Count;
-        }
-        public Card GetCard()
-        {
-            Card currentCard = cards[random.Next(0,cards.Count)];
-            return currentCard;
-        }
+        public Deck() { this.counter = cards.Count; }
+        public Card GetCard() { return cards[random.Next(0, cards.Count)]; }
     }
 }
