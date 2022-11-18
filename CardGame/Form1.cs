@@ -6,8 +6,6 @@ namespace CardGame
 {
     public partial class Form1 : Form
     {
-        /*private Player P1 = new Player();
-        private Player P2 = new Player();*/
         private Dictionary<string, Player> Players = new Dictionary<string, Player>()
         {
             { "P1", new Player() },
@@ -19,15 +17,14 @@ namespace CardGame
         {
             InitializeComponent();
 
-            game.Start(Players["P1"], Players["P2"]);
+            game.Start(Players);
             Round—ounter.Text = $"–‡ÛÌ‰ {game.getCurrentRound.ToString()}"; 
 
             // ¬˚‰‡∏Ï Ë„ÓÍ‡Ï Í‡Ú˚
-            foreach(Card card in Players["P1"].handCard)
-                HandDeckP1.Items.Add(card.ToString());
+            foreach(var player in Players) 
+                foreach(Card card in player.Value.handCard)
+                    ((ComboBox)this.Controls["HandDeck" + player.Key]).Items.Add(card.ToString());
 
-            foreach (Card card in Players["P2"].handCard)
-                HandDeckP2.Items.Add(card.ToString());
         }
 
         public void RerenderList(ComboBox comboBox, Player P)
@@ -82,9 +79,9 @@ namespace CardGame
                     }
 
             }
-            ((ComboBox)HeroesOnTheField).Items.Add(((ComboBox)HandDeck).SelectedItem.ToString());       //
-            RerenderList((ComboBox)HandDeck, Players[keyPlayer]);                                      //
-            ((ComboBox)HeroesOnTheField).SelectedItem = ((ComboBox)HeroesOnTheField).Items[0];          //«¿◊≈Ã ﬂ ›“Œ ”¬»ƒ≈À
+            ((ComboBox)HeroesOnTheField).Items.Add(((ComboBox)HandDeck).SelectedItem.ToString());
+            RerenderList((ComboBox)HandDeck, Players[keyPlayer]);
+            ((ComboBox)HeroesOnTheField).SelectedItem = ((ComboBox)HeroesOnTheField).Items[0];
             ((ComboBox)HandDeck).SelectedItem = ((ComboBox)HandDeck).Items[0];
         }
 
