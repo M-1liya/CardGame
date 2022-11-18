@@ -17,7 +17,7 @@ namespace CardGame.Assets
         {
             for(int i = 0; i < 5; i++)
                 foreach (var player in Players)
-                   player.Value.handCard.Add(deck.GetCard());
+                   player.Value.getHandCard.Add(deck.GetCard());
         }
     
         public int getCurrentRound => currentRound;

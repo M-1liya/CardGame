@@ -9,7 +9,10 @@ namespace CardGame.Assets
 {
     public class Player
     {
-        public List<Card> handCard = new List<Card>();
+        private List<Card> _handCard = new List<Card>();
         public int elexir;
+        public List<Card> getHandCard => _handCard;
+        public void addHandCard(Card card) { _handCard.Add(card); }
+        public void removeHandCard(Card card) { _handCard.Remove(card); }
     }
 }

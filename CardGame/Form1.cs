@@ -11,78 +11,63 @@ namespace CardGame
             { "P1", new Player() },
             { "P2", new Player() },
         };
-    private Game game = new Game();
-        public Deck decks = new Deck();
+        private Game game = new Game();
+        private Deck decks = new Deck();
         public Form1()
         {
             InitializeComponent();
 
             game.Start(Players);
-            RoundСounter.Text = $"Раунд {game.getCurrentRound.ToString()}"; 
+            RoundСounter.Text = $"Раунд {game.getCurrentRound.ToString()}";
 
-            // Выдаём игрокам карты
-            foreach(var player in Players) 
-                foreach(Card card in player.Value.handCard)
-                    ((ComboBox)this.Controls["HandDeck" + player.Key]).Items.Add(card.ToString());
+            foreach (var player in Players)
+                RerenderList((ComboBox)this.Controls["HandDeck" + player.Key], player.Value);
 
         }
 
-        public void RerenderList(ComboBox comboBox, Player P)
+        /// <summary>
+        /// <para>
+        /// Этот метод очищяет ComboBox, который ему передали и
+        /// вставляет в него обьекты типа (текст, значение) из Player.getHandCard
+        /// </para>
+        /// <see href="https://stackoverflow.com/questions/3063320/combobox-adding-text-and-value-to-an-item-no-binding-source">Для ознакомления моэно посмотреть Stackoverflow по данному вопросу</see>
+        /// </summary>
+        /// <param name="comboBox">CommandBox, который нужно перезаписать</param>
+        /// <param name="comboBox">Игрок, который имееет HandCard</param>
+        public void RerenderList(ComboBox comboBox, Player player)
         {
             comboBox.Items.Clear();
-
-            foreach (Card card in P.handCard)   //Определяем тип карты, и выводим её св-ва на экран
-            {
-
-                if (card.GetTypeCard == Card.TypeCard.Hero)
-                {
-                    Hero hero = (Hero)card;
-                    comboBox.Items.Add(hero.ToString());
-                }
-                else if (card.GetTypeCard == Card.TypeCard.Potion)
-                {
-                    Potion potion = (Potion)card;
-                    comboBox.Items.Add(potion.ToString());
-                }
-
-            }
-
+            comboBox.DisplayMember = "Text";
+            comboBox.ValueMember = "Value";
+            foreach (Card playerCard in player.getHandCard)
+                comboBox.Items.Add(new {Text = playerCard.ToString(), Value = playerCard} );
         }
-  
         private void HandDeck_TextChanged(object sender, EventArgs e)
         {
             ComboBox? HandDeck = sender as ComboBox;
+            
             string keyPlayer = HandDeck.Name.Replace("HandDeck", "");
-            var DropOnTheFieldButton = this.Controls["DropOnTheFieldButton" + keyPlayer];
-
-            foreach (Card card in Players[keyPlayer].handCard)
-                if (HandDeck.SelectedItem.ToString() == card.ToString())
-                    DropOnTheFieldButton.Enabled = (card is Potion) ? false : true;
-
+            var DropOnTheFieldButton = this.Controls["DropOnTheFieldButton" + keyPlayer]; 
+            var selectedItemFromHandDeck = (HandDeck.SelectedItem as dynamic).Value; // <=> HandDeck.selectedItem
+            DropOnTheFieldButton.Enabled = (selectedItemFromHandDeck is Hero) ? true : false;
         }
         private void DropOnTheFieldButton_Click(object sender, EventArgs e)
         {
-            Button? DropOnTheField = sender as Button;
-            string? keyPlayer = DropOnTheField.Name.Replace("DropOnTheFieldButton", "");
-
-            var DropOnTheFieldButton = this.Controls["DropOnTheFieldButton" + keyPlayer];
-            var HandDeck = this.Controls["HandDeck" + keyPlayer];
-            var HeroesOnTheField = this.Controls["HeroesOnTheField" + keyPlayer];
-
+            Button? DropOnTheField = sender as Button; // Кнопка с которой произошёл клик
             
-            foreach (Card card in Players[keyPlayer].handCard)
-            {
-                    if (((ComboBox)HandDeck).SelectedItem.ToString() == card.ToString())
-                    {
-                        Players[keyPlayer].handCard.Remove(card);
-                        break;
-                    }
+            string? keyPlayer = DropOnTheField.Name.Replace("DropOnTheFieldButton", "");
+            var HandDeck = (ComboBox)this.Controls["HandDeck" + keyPlayer];
+            var HeroesOnTheField = (ComboBox)this.Controls["HeroesOnTheField" + keyPlayer];
 
-            }
-            ((ComboBox)HeroesOnTheField).Items.Add(((ComboBox)HandDeck).SelectedItem.ToString());
-            RerenderList((ComboBox)HandDeck, Players[keyPlayer]);
-            ((ComboBox)HeroesOnTheField).SelectedItem = ((ComboBox)HeroesOnTheField).Items[0];
-            ((ComboBox)HandDeck).SelectedItem = ((ComboBox)HandDeck).Items[0];
+            var selectedItemFromHandDeck = (HandDeck.SelectedItem as dynamic).Value;
+            var player = Players[keyPlayer];
+            
+            player.removeHandCard(selectedItemFromHandDeck); //Убрали использованную карту
+            HeroesOnTheField.Items.Add(selectedItemFromHandDeck);
+            RerenderList(HandDeck, Players[keyPlayer]);
+            
+            HeroesOnTheField.SelectedItem = HeroesOnTheField.Items[0];
+            HandDeck.SelectedItem = HandDeck.Items[0];
         }
 
     }
