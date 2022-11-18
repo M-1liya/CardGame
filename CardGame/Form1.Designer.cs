@@ -38,30 +38,32 @@
             this.HeroesOnTheFieldP1 = new System.Windows.Forms.ComboBox();
             this.HeroesOnTheFieldP2 = new System.Windows.Forms.ComboBox();
             this.DropOnTheFieldButtonP1 = new System.Windows.Forms.Button();
+            this.DropOnTheFieldButtonP2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ImageP1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // HandDeckP1
             // 
-            this.HandDeckP1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.HandDeckP1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.HandDeckP1.FormattingEnabled = true;
             this.HandDeckP1.Location = new System.Drawing.Point(14, 204);
             this.HandDeckP1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.HandDeckP1.Name = "HandDeckP1";
-            this.HandDeckP1.Size = new System.Drawing.Size(187, 28);
+            this.HandDeckP1.Size = new System.Drawing.Size(205, 228);
             this.HandDeckP1.TabIndex = 1;
-            this.HandDeckP1.TextChanged += new System.EventHandler(this.HandDeckP1_TextChanged);
+            this.HandDeckP1.TextChanged += new System.EventHandler(this.HandDeck_TextChanged);
             // 
             // HandDeckP2
             // 
-            this.HandDeckP2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.HandDeckP2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.HandDeckP2.FormattingEnabled = true;
-            this.HandDeckP2.Location = new System.Drawing.Point(747, 204);
+            this.HandDeckP2.Location = new System.Drawing.Point(734, 204);
             this.HandDeckP2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.HandDeckP2.Name = "HandDeckP2";
-            this.HandDeckP2.Size = new System.Drawing.Size(187, 28);
+            this.HandDeckP2.Size = new System.Drawing.Size(187, 228);
             this.HandDeckP2.TabIndex = 2;
+            this.HandDeckP2.TextChanged += new System.EventHandler(this.HandDeck_TextChanged);
             // 
             // ImageP1
             // 
@@ -106,41 +108,54 @@
             // 
             // HeroesOnTheFieldP1
             // 
-            this.HeroesOnTheFieldP1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.HeroesOnTheFieldP1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.HeroesOnTheFieldP1.FormattingEnabled = true;
-            this.HeroesOnTheFieldP1.Location = new System.Drawing.Point(262, 292);
+            this.HeroesOnTheFieldP1.Location = new System.Drawing.Point(297, 204);
             this.HeroesOnTheFieldP1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.HeroesOnTheFieldP1.Name = "HeroesOnTheFieldP1";
-            this.HeroesOnTheFieldP1.Size = new System.Drawing.Size(187, 28);
+            this.HeroesOnTheFieldP1.Size = new System.Drawing.Size(187, 228);
             this.HeroesOnTheFieldP1.TabIndex = 7;
             // 
             // HeroesOnTheFieldP2
             // 
-            this.HeroesOnTheFieldP2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.HeroesOnTheFieldP2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.HeroesOnTheFieldP2.FormattingEnabled = true;
-            this.HeroesOnTheFieldP2.Location = new System.Drawing.Point(528, 292);
+            this.HeroesOnTheFieldP2.Location = new System.Drawing.Point(499, 204);
             this.HeroesOnTheFieldP2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.HeroesOnTheFieldP2.Name = "HeroesOnTheFieldP2";
-            this.HeroesOnTheFieldP2.Size = new System.Drawing.Size(187, 28);
+            this.HeroesOnTheFieldP2.Size = new System.Drawing.Size(187, 228);
             this.HeroesOnTheFieldP2.TabIndex = 8;
             // 
             // DropOnTheFieldButtonP1
             // 
-            this.DropOnTheFieldButtonP1.Location = new System.Drawing.Point(25, 423);
+            this.DropOnTheFieldButtonP1.Enabled = false;
+            this.DropOnTheFieldButtonP1.Location = new System.Drawing.Point(14, 423);
             this.DropOnTheFieldButtonP1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DropOnTheFieldButtonP1.Name = "DropOnTheFieldButtonP1";
-            this.DropOnTheFieldButtonP1.Size = new System.Drawing.Size(176, 31);
+            this.DropOnTheFieldButtonP1.Size = new System.Drawing.Size(205, 46);
             this.DropOnTheFieldButtonP1.TabIndex = 9;
             this.DropOnTheFieldButtonP1.Text = "Вывести на поле";
             this.DropOnTheFieldButtonP1.UseVisualStyleBackColor = true;
-            this.DropOnTheFieldButtonP1.Visible = false;
-            this.DropOnTheFieldButtonP1.Click += new System.EventHandler(this.DropOnTheFieldButtonP1_Click);
+            this.DropOnTheFieldButtonP1.Click += new System.EventHandler(this.DropOnTheFieldButton_Click);
+            // 
+            // DropOnTheFieldButtonP2
+            // 
+            this.DropOnTheFieldButtonP2.Enabled = false;
+            this.DropOnTheFieldButtonP2.Location = new System.Drawing.Point(734, 423);
+            this.DropOnTheFieldButtonP2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.DropOnTheFieldButtonP2.Name = "DropOnTheFieldButtonP2";
+            this.DropOnTheFieldButtonP2.Size = new System.Drawing.Size(187, 46);
+            this.DropOnTheFieldButtonP2.TabIndex = 10;
+            this.DropOnTheFieldButtonP2.Text = "Вывести на поле";
+            this.DropOnTheFieldButtonP2.UseVisualStyleBackColor = true;
+            this.DropOnTheFieldButtonP2.Click += new System.EventHandler(this.DropOnTheFieldButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(949, 527);
+            this.Controls.Add(this.DropOnTheFieldButtonP2);
             this.Controls.Add(this.DropOnTheFieldButtonP1);
             this.Controls.Add(this.HeroesOnTheFieldP2);
             this.Controls.Add(this.HeroesOnTheFieldP1);
@@ -172,5 +187,6 @@
         private ComboBox HeroesOnTheFieldP1;
         private ComboBox HeroesOnTheFieldP2;
         private Button DropOnTheFieldButtonP1;
+        private Button DropOnTheFieldButtonP2;
     }
 }

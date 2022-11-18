@@ -24,27 +24,7 @@ namespace CardGame.Assets
                 P2.handCard.Add(deck.GetCard());
             }
         }
-        public void RerenderList(ComboBox comboBox, Player P)
-        {
-            comboBox.Items.Clear();
-
-            foreach (Card card in P.handCard)   //Определяем тип карты, и выводим её св-ва на экран
-            {
-
-                if (card.GetTypeCard == Card.TypeCard.Hero)
-                {
-                    Hero hero = (Hero)card;
-                    comboBox.Items.Add(hero.ToString());
-                }
-                if(card.GetTypeCard == Card.TypeCard.Potion)
-                {
-                    Potion potion = (Potion)card;
-                    comboBox.Items.Add(potion.ToString());
-                }
-
-            }
-            
-        }
+    
         public int getCurrentRound => currentRound;
         public void setCurrentRound(int currentRound) { this.currentRound = currentRound; }
     }

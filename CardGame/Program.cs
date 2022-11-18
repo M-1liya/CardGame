@@ -5,6 +5,7 @@ namespace CardGame
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
+        /// 
         [STAThread]
         static void Main()
         {
@@ -12,7 +13,6 @@ namespace CardGame
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new Form1());
-
 
             //when will the release of the game be uncomment and delete the line with the Form1 call
             //Application.Run(new Menu());
