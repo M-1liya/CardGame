@@ -17,7 +17,6 @@ namespace CardGame.Assets.nsDeck
         }
         public enum TypeCard { Hero, Potion }
         public TypeCard GetTypeCard => _typeCard;
-
         abstract public override string ToString();
         public bool isHero(Card card) { return card is Hero; }
     }
