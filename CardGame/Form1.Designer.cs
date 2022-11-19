@@ -68,7 +68,7 @@
             // ImageP1
             // 
             this.ImageP1.Image = global::CardGame.Properties.Resources.p1;
-            this.ImageP1.Location = new System.Drawing.Point(14, 68);
+            this.ImageP1.Location = new System.Drawing.Point(67, 53);
             this.ImageP1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ImageP1.Name = "ImageP1";
             this.ImageP1.Size = new System.Drawing.Size(97, 112);
@@ -79,7 +79,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::CardGame.Properties.Resources.p2;
-            this.pictureBox1.Location = new System.Drawing.Point(824, 53);
+            this.pictureBox1.Location = new System.Drawing.Point(780, 53);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(97, 112);
