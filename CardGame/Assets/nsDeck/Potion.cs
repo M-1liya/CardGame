@@ -30,10 +30,8 @@ namespace CardGame.Assets.nsDeck
 
         public override string ToString() 
         {
-            if (GetTypePotion == Potion.TypePotion.Damage)
-                return $"({Cost}) {GetTypePotion} Эффект: {Effect} HP";
-            else
-                return $"({Cost}) {GetTypePotion} Эффект: +{Effect} HP";
+            string statusEffect = (Effect > 0) ? "+" : "";
+            return $"({Cost}) {GetTypePotion} Эффект: {statusEffect + Effect} HP";
         }
     }
 }
