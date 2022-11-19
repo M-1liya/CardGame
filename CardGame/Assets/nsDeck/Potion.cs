@@ -12,15 +12,13 @@ namespace CardGame.Assets.nsDeck
         private int _effect;
         private TypePotion _typePotion;
 
-        public Potion(TypeCard typeCard ,int cartCost, int cartEffect, TypePotion typePotion)
+        public Potion(TypeCard typeCard ,int cardCost, int cardEffect, TypePotion typePotion)
+            : base(typeCard, cardCost)
         {
-            this._effect = cartEffect;
-            if(typePotion == Potion.TypePotion.Damage && cartEffect > 0) this._effect = -cartEffect;
-
-            this._cost = cartCost;
+            this._effect = (typePotion == Potion.TypePotion.Damage) ? -cardEffect : cardEffect;
+            this._cost = cardCost;
             this._typeCard = typeCard;
             this._typePotion = typePotion;
-
         }
 
         public enum TypePotion { Health, Damage }

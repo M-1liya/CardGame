@@ -9,9 +9,12 @@ namespace CardGame.Assets.nsDeck
     public abstract class Card
     {
         protected int _cost;
-        protected string _name = "";
         protected TypeCard _typeCard;
-
+        protected Card(TypeCard _typeCard, int _cost)
+        {
+            this._typeCard = _typeCard;
+            this._cost = _cost;
+        }
         public enum TypeCard { Hero, Potion }
         public TypeCard GetTypeCard => _typeCard;
 

@@ -12,12 +12,11 @@ namespace CardGame.Assets.nsDeck
         private int _damage;
         private TypeHero _typeHero;
         public Hero(TypeCard typeCard, int cardCost, int cardDamage, TypeHero typeHero, int cartHP)
+            : base(typeCard, cardCost)
         {
             this._typeHero = typeHero;
-            this._cost = cardCost;
             this._damage = cardDamage;
             this._hp = cartHP;
-            this._typeCard = typeCard;
         }
 
         public int HP // Нужно поменять на heatpoint
@@ -26,7 +25,6 @@ namespace CardGame.Assets.nsDeck
         }
         public enum TypeHero { Dragon, Princess, Shrek, Donkey, Knight, osel }
         public int getDamage => _damage;
-        public string getName => _name;
         public int getCost => _cost;
         public TypeHero GetTypeHero => _typeHero;
         public override string ToString() => $"({getCost}) {GetTypeHero} Атака: {getDamage}  HP: {HP}";

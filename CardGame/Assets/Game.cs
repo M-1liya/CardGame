@@ -15,8 +15,8 @@ namespace CardGame.Assets
         public Game(int currentRound = 1) { this.currentRound = currentRound; }
         public void Start(Dictionary<string, Player> Players)
         {
-            for(int i = 0; i < 5; i++)
-                foreach (var player in Players)
+            foreach (var player in Players)
+                for(int i = 0; i < 5; i++)
                    player.Value.getHandCard.Add(deck.GetCard());
         }
     
