@@ -47,12 +47,12 @@
             // 
             this.HandDeckP1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.HandDeckP1.FormattingEnabled = true;
-            this.HandDeckP1.Location = new System.Drawing.Point(14, 204);
+            this.HandDeckP1.Location = new System.Drawing.Point(12, 204);
             this.HandDeckP1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.HandDeckP1.Name = "HandDeckP1";
             this.HandDeckP1.Size = new System.Drawing.Size(205, 228);
             this.HandDeckP1.TabIndex = 1;
-            this.HandDeckP1.TextChanged += new System.EventHandler(this.HandDeck_TextChanged);
+            this.HandDeckP1.SelectedIndexChanged += new System.EventHandler(this.HandDeck_TextChanged);
             // 
             // HandDeckP2
             // 
@@ -63,7 +63,7 @@
             this.HandDeckP2.Name = "HandDeckP2";
             this.HandDeckP2.Size = new System.Drawing.Size(187, 228);
             this.HandDeckP2.TabIndex = 2;
-            this.HandDeckP2.TextChanged += new System.EventHandler(this.HandDeck_TextChanged);
+            this.HandDeckP2.SelectedIndexChanged += new System.EventHandler(this.HandDeck_TextChanged);
             // 
             // ImageP1
             // 

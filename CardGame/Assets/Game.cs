@@ -11,7 +11,11 @@ namespace CardGame.Assets
     {
         private int _currentRound;
         static Deck _deck = new Deck();
-        public Game(int currentRound = 1) { this._currentRound = currentRound; }
+        private int _turnOrder;
+        public Game(int currentRound = 1, int turnOrder = 1) { 
+            this._currentRound = currentRound;
+            this._turnOrder = turnOrder;
+        }
         public void Start(Dictionary<string, Player> Players)
         {
             cardDistribution(Players);
@@ -23,7 +27,11 @@ namespace CardGame.Assets
                     player.Value.getHandCard.Add(_deck.GetCard());
         }
         public int getCurrentRound => _currentRound;
+        public int getTurnOrder => _turnOrder;
         public void setCurrentRound(int currentRound) { this._currentRound = currentRound; }
+        public void resetTurnOrder(int countPlayers) { 
+            this._turnOrder = (_turnOrder >= countPlayers) ? 1: ++_turnOrder; 
+        }
     }
 }
 
