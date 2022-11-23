@@ -12,7 +12,7 @@ namespace CardGame.Assets.nsDeck
         private List<Card> cards = new List<Card>()
         {
             //Герои
-            new Hero(Card.TypeCard.Hero, 4, 2, Hero.TypeHero.Knight, 5),
+            new Hero(Card.TypeCard.Hero, 1, 2, Hero.TypeHero.Knight, 5),
             new Hero(Card.TypeCard.Hero, 7, 4, Hero.TypeHero.Dragon, 10),
             new Hero(Card.TypeCard.Hero, 3, 3, Hero.TypeHero.Shrek, 3),
             new Hero(Card.TypeCard.Hero, 2, 5, Hero.TypeHero.Donkey, 2),
@@ -22,6 +22,6 @@ namespace CardGame.Assets.nsDeck
         };
         Random random = new Random();
         public Deck() { this.counter = cards.Count; }
-        public Card GetCard() { return cards[random.Next(0, cards.Count)]; }
+        public Card Cards => cards[random.Next(0, cards.Count)];
     }
 }

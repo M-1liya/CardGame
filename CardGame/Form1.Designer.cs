@@ -34,41 +34,60 @@
             this.ImageP1 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.RoundСounter = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.HeroesOnTheFieldP1 = new System.Windows.Forms.ComboBox();
-            this.HeroesOnTheFieldP2 = new System.Windows.Forms.ComboBox();
-            this.DropOnTheFieldButtonP1 = new System.Windows.Forms.Button();
-            this.DropOnTheFieldButtonP2 = new System.Windows.Forms.Button();
+            this.HeroesOnFieldP1 = new System.Windows.Forms.ComboBox();
+            this.HeroesOnFieldP2 = new System.Windows.Forms.ComboBox();
+            this.HandDeckButtonP1 = new System.Windows.Forms.Button();
+            this.DropOnFieldButtonP2 = new System.Windows.Forms.Button();
+            this.textOfManaP1 = new System.Windows.Forms.Label();
+            this.amountManaP1 = new System.Windows.Forms.Label();
+            this.HeroesOnFieldButtonP1 = new System.Windows.Forms.Button();
+            this.attackButtonP2 = new System.Windows.Forms.Button();
+            this.amountHealtNexusP1 = new System.Windows.Forms.Label();
+            this.textOfNexusP1 = new System.Windows.Forms.Label();
+            this.amountHealtNexusP2 = new System.Windows.Forms.Label();
+            this.textOfNexusP2 = new System.Windows.Forms.Label();
+            this.amountManaP2 = new System.Windows.Forms.Label();
+            this.textOfManaP2 = new System.Windows.Forms.Label();
+            this.battlegroundP1 = new System.Windows.Forms.ComboBox();
+            this.battlegroundP2 = new System.Windows.Forms.ComboBox();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.battlegroundButtonP1 = new System.Windows.Forms.Button();
+            this.splitter1 = new System.Windows.Forms.Splitter();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ImageP1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // HandDeckP1
             // 
             this.HandDeckP1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.HandDeckP1.FormattingEnabled = true;
-            this.HandDeckP1.Location = new System.Drawing.Point(12, 204);
+            this.HandDeckP1.Location = new System.Drawing.Point(12, 198);
             this.HandDeckP1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.HandDeckP1.Name = "HandDeckP1";
-            this.HandDeckP1.Size = new System.Drawing.Size(205, 228);
+            this.HandDeckP1.Size = new System.Drawing.Size(313, 228);
             this.HandDeckP1.TabIndex = 1;
-            this.HandDeckP1.SelectedIndexChanged += new System.EventHandler(this.HandDeck_TextChanged);
+            this.HandDeckP1.SelectedIndexChanged += new System.EventHandler(this.HandDeck_SelectedIndexChanged);
             // 
             // HandDeckP2
             // 
             this.HandDeckP2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.HandDeckP2.FormattingEnabled = true;
-            this.HandDeckP2.Location = new System.Drawing.Point(734, 204);
+            this.HandDeckP2.Location = new System.Drawing.Point(1062, 197);
             this.HandDeckP2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.HandDeckP2.Name = "HandDeckP2";
-            this.HandDeckP2.Size = new System.Drawing.Size(187, 228);
+            this.HandDeckP2.Size = new System.Drawing.Size(313, 228);
             this.HandDeckP2.TabIndex = 2;
-            this.HandDeckP2.SelectedIndexChanged += new System.EventHandler(this.HandDeck_TextChanged);
+            this.HandDeckP2.SelectedIndexChanged += new System.EventHandler(this.HandDeck_SelectedIndexChanged);
             // 
             // ImageP1
             // 
             this.ImageP1.Image = global::CardGame.Properties.Resources.p1;
-            this.ImageP1.Location = new System.Drawing.Point(67, 53);
+            this.ImageP1.Location = new System.Drawing.Point(24, 68);
             this.ImageP1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ImageP1.Name = "ImageP1";
             this.ImageP1.Size = new System.Drawing.Size(97, 112);
@@ -79,10 +98,10 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::CardGame.Properties.Resources.p2;
-            this.pictureBox1.Location = new System.Drawing.Point(780, 53);
+            this.pictureBox1.Location = new System.Drawing.Point(1061, 67);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(97, 112);
+            this.pictureBox1.Size = new System.Drawing.Size(102, 112);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
@@ -91,86 +110,258 @@
             // 
             this.RoundСounter.AutoSize = true;
             this.RoundСounter.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.RoundСounter.Location = new System.Drawing.Point(450, 25);
+            this.RoundСounter.Location = new System.Drawing.Point(659, 25);
             this.RoundСounter.Name = "RoundСounter";
             this.RoundСounter.Size = new System.Drawing.Size(73, 28);
             this.RoundСounter.TabIndex = 5;
             this.RoundСounter.Text = "Раунд ";
             // 
-            // label1
+            // HeroesOnFieldP1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(486, 68);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(13, 440);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|";
+            this.HeroesOnFieldP1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.HeroesOnFieldP1.FormattingEnabled = true;
+            this.HeroesOnFieldP1.Location = new System.Drawing.Point(360, 198);
+            this.HeroesOnFieldP1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.HeroesOnFieldP1.Name = "HeroesOnFieldP1";
+            this.HeroesOnFieldP1.Size = new System.Drawing.Size(313, 213);
+            this.HeroesOnFieldP1.TabIndex = 7;
+            this.HeroesOnFieldP1.SelectedIndexChanged += new System.EventHandler(this.HeroesOnField_SelectedIndexChanged);
             // 
-            // HeroesOnTheFieldP1
+            // HeroesOnFieldP2
             // 
-            this.HeroesOnTheFieldP1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
-            this.HeroesOnTheFieldP1.FormattingEnabled = true;
-            this.HeroesOnTheFieldP1.Location = new System.Drawing.Point(297, 204);
-            this.HeroesOnTheFieldP1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.HeroesOnTheFieldP1.Name = "HeroesOnTheFieldP1";
-            this.HeroesOnTheFieldP1.Size = new System.Drawing.Size(187, 228);
-            this.HeroesOnTheFieldP1.TabIndex = 7;
+            this.HeroesOnFieldP2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.HeroesOnFieldP2.FormattingEnabled = true;
+            this.HeroesOnFieldP2.Location = new System.Drawing.Point(708, 198);
+            this.HeroesOnFieldP2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.HeroesOnFieldP2.Name = "HeroesOnFieldP2";
+            this.HeroesOnFieldP2.Size = new System.Drawing.Size(313, 228);
+            this.HeroesOnFieldP2.TabIndex = 8;
             // 
-            // HeroesOnTheFieldP2
+            // HandDeckButtonP1
             // 
-            this.HeroesOnTheFieldP2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
-            this.HeroesOnTheFieldP2.FormattingEnabled = true;
-            this.HeroesOnTheFieldP2.Location = new System.Drawing.Point(499, 204);
-            this.HeroesOnTheFieldP2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.HeroesOnTheFieldP2.Name = "HeroesOnTheFieldP2";
-            this.HeroesOnTheFieldP2.Size = new System.Drawing.Size(187, 228);
-            this.HeroesOnTheFieldP2.TabIndex = 8;
+            this.HandDeckButtonP1.Enabled = false;
+            this.HandDeckButtonP1.Location = new System.Drawing.Point(14, 417);
+            this.HandDeckButtonP1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.HandDeckButtonP1.Name = "HandDeckButtonP1";
+            this.HandDeckButtonP1.Size = new System.Drawing.Size(311, 46);
+            this.HandDeckButtonP1.TabIndex = 9;
+            this.HandDeckButtonP1.Text = "Вывести на поле";
+            this.HandDeckButtonP1.UseVisualStyleBackColor = true;
+            this.HandDeckButtonP1.Click += new System.EventHandler(this.HandDeckButton_Click);
             // 
-            // DropOnTheFieldButtonP1
+            // DropOnFieldButtonP2
             // 
-            this.DropOnTheFieldButtonP1.Enabled = false;
-            this.DropOnTheFieldButtonP1.Location = new System.Drawing.Point(14, 423);
-            this.DropOnTheFieldButtonP1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.DropOnTheFieldButtonP1.Name = "DropOnTheFieldButtonP1";
-            this.DropOnTheFieldButtonP1.Size = new System.Drawing.Size(205, 46);
-            this.DropOnTheFieldButtonP1.TabIndex = 9;
-            this.DropOnTheFieldButtonP1.Text = "Вывести на поле";
-            this.DropOnTheFieldButtonP1.UseVisualStyleBackColor = true;
-            this.DropOnTheFieldButtonP1.Click += new System.EventHandler(this.DropOnTheFieldButton_Click);
+            this.DropOnFieldButtonP2.Enabled = false;
+            this.DropOnFieldButtonP2.Location = new System.Drawing.Point(1061, 417);
+            this.DropOnFieldButtonP2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.DropOnFieldButtonP2.Name = "DropOnFieldButtonP2";
+            this.DropOnFieldButtonP2.Size = new System.Drawing.Size(315, 46);
+            this.DropOnFieldButtonP2.TabIndex = 10;
+            this.DropOnFieldButtonP2.Text = "Вывести на поле";
+            this.DropOnFieldButtonP2.UseVisualStyleBackColor = true;
+            this.DropOnFieldButtonP2.Click += new System.EventHandler(this.HeroesOnFieldButton_Click);
             // 
-            // DropOnTheFieldButtonP2
+            // textOfManaP1
             // 
-            this.DropOnTheFieldButtonP2.Enabled = false;
-            this.DropOnTheFieldButtonP2.Location = new System.Drawing.Point(734, 423);
-            this.DropOnTheFieldButtonP2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.DropOnTheFieldButtonP2.Name = "DropOnTheFieldButtonP2";
-            this.DropOnTheFieldButtonP2.Size = new System.Drawing.Size(187, 46);
-            this.DropOnTheFieldButtonP2.TabIndex = 10;
-            this.DropOnTheFieldButtonP2.Text = "Вывести на поле";
-            this.DropOnTheFieldButtonP2.UseVisualStyleBackColor = true;
-            this.DropOnTheFieldButtonP2.Click += new System.EventHandler(this.DropOnTheFieldButton_Click);
+            this.textOfManaP1.AutoSize = true;
+            this.textOfManaP1.Location = new System.Drawing.Point(142, 135);
+            this.textOfManaP1.Name = "textOfManaP1";
+            this.textOfManaP1.Size = new System.Drawing.Size(104, 20);
+            this.textOfManaP1.TabIndex = 11;
+            this.textOfManaP1.Text = "Кол-во маны:";
+            // 
+            // amountManaP1
+            // 
+            this.amountManaP1.AutoSize = true;
+            this.amountManaP1.Location = new System.Drawing.Point(248, 135);
+            this.amountManaP1.Name = "amountManaP1";
+            this.amountManaP1.Size = new System.Drawing.Size(0, 20);
+            this.amountManaP1.TabIndex = 12;
+            // 
+            // HeroesOnFieldButtonP1
+            // 
+            this.HeroesOnFieldButtonP1.Enabled = false;
+            this.HeroesOnFieldButtonP1.Location = new System.Drawing.Point(360, 419);
+            this.HeroesOnFieldButtonP1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.HeroesOnFieldButtonP1.Name = "HeroesOnFieldButtonP1";
+            this.HeroesOnFieldButtonP1.Size = new System.Drawing.Size(313, 46);
+            this.HeroesOnFieldButtonP1.TabIndex = 15;
+            this.HeroesOnFieldButtonP1.Text = "Отправить в битву";
+            this.HeroesOnFieldButtonP1.UseVisualStyleBackColor = true;
+            this.HeroesOnFieldButtonP1.Click += new System.EventHandler(this.HeroesOnFieldButton_Click);
+            // 
+            // attackButtonP2
+            // 
+            this.attackButtonP2.Enabled = false;
+            this.attackButtonP2.Location = new System.Drawing.Point(708, 417);
+            this.attackButtonP2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.attackButtonP2.Name = "attackButtonP2";
+            this.attackButtonP2.Size = new System.Drawing.Size(313, 46);
+            this.attackButtonP2.TabIndex = 16;
+            this.attackButtonP2.Text = "Пропустить ход";
+            this.attackButtonP2.UseVisualStyleBackColor = true;
+            // 
+            // amountHealtNexusP1
+            // 
+            this.amountHealtNexusP1.AutoSize = true;
+            this.amountHealtNexusP1.Location = new System.Drawing.Point(201, 94);
+            this.amountHealtNexusP1.Name = "amountHealtNexusP1";
+            this.amountHealtNexusP1.Size = new System.Drawing.Size(0, 20);
+            this.amountHealtNexusP1.TabIndex = 18;
+            // 
+            // textOfNexusP1
+            // 
+            this.textOfNexusP1.AutoSize = true;
+            this.textOfNexusP1.Location = new System.Drawing.Point(142, 94);
+            this.textOfNexusP1.Name = "textOfNexusP1";
+            this.textOfNexusP1.Size = new System.Drawing.Size(59, 20);
+            this.textOfNexusP1.TabIndex = 17;
+            this.textOfNexusP1.Text = "Нексус:";
+            // 
+            // amountHealtNexusP2
+            // 
+            this.amountHealtNexusP2.AutoSize = true;
+            this.amountHealtNexusP2.Location = new System.Drawing.Point(1240, 94);
+            this.amountHealtNexusP2.Name = "amountHealtNexusP2";
+            this.amountHealtNexusP2.Size = new System.Drawing.Size(0, 20);
+            this.amountHealtNexusP2.TabIndex = 24;
+            // 
+            // textOfNexusP2
+            // 
+            this.textOfNexusP2.AutoSize = true;
+            this.textOfNexusP2.Location = new System.Drawing.Point(1181, 94);
+            this.textOfNexusP2.Name = "textOfNexusP2";
+            this.textOfNexusP2.Size = new System.Drawing.Size(59, 20);
+            this.textOfNexusP2.TabIndex = 23;
+            this.textOfNexusP2.Text = "Нексус:";
+            // 
+            // amountManaP2
+            // 
+            this.amountManaP2.AutoSize = true;
+            this.amountManaP2.Location = new System.Drawing.Point(1287, 135);
+            this.amountManaP2.Name = "amountManaP2";
+            this.amountManaP2.Size = new System.Drawing.Size(0, 20);
+            this.amountManaP2.TabIndex = 22;
+            // 
+            // textOfManaP2
+            // 
+            this.textOfManaP2.AutoSize = true;
+            this.textOfManaP2.Location = new System.Drawing.Point(1181, 135);
+            this.textOfManaP2.Name = "textOfManaP2";
+            this.textOfManaP2.Size = new System.Drawing.Size(104, 20);
+            this.textOfManaP2.TabIndex = 21;
+            this.textOfManaP2.Text = "Кол-во маны:";
+            // 
+            // battlegroundP1
+            // 
+            this.battlegroundP1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.battlegroundP1.FormattingEnabled = true;
+            this.battlegroundP1.Location = new System.Drawing.Point(12, 489);
+            this.battlegroundP1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.battlegroundP1.Name = "battlegroundP1";
+            this.battlegroundP1.Size = new System.Drawing.Size(661, 173);
+            this.battlegroundP1.TabIndex = 25;
+            // 
+            // battlegroundP2
+            // 
+            this.battlegroundP2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.battlegroundP2.FormattingEnabled = true;
+            this.battlegroundP2.Location = new System.Drawing.Point(715, 489);
+            this.battlegroundP2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.battlegroundP2.Name = "battlegroundP2";
+            this.battlegroundP2.Size = new System.Drawing.Size(661, 173);
+            this.battlegroundP2.TabIndex = 26;
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.splitContainer1.Cursor = System.Windows.Forms.Cursors.VSplit;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel1.Controls.Add(this.battlegroundButtonP1);
+            this.splitContainer1.Panel1.Controls.Add(this.splitter1);
+            this.splitContainer1.Panel1.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.splitContainer1.Panel1.Tag = "";
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel2.Controls.Add(this.button2);
+            this.splitContainer1.Panel2.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.splitContainer1.Panel2.Tag = "";
+            this.splitContainer1.Size = new System.Drawing.Size(1386, 726);
+            this.splitContainer1.SplitterDistance = 688;
+            this.splitContainer1.TabIndex = 27;
+            // 
+            // battlegroundButtonP1
+            // 
+            this.battlegroundButtonP1.Location = new System.Drawing.Point(17, 672);
+            this.battlegroundButtonP1.Name = "battlegroundButtonP1";
+            this.battlegroundButtonP1.Size = new System.Drawing.Size(654, 44);
+            this.battlegroundButtonP1.TabIndex = 1;
+            this.battlegroundButtonP1.Text = "В бой!";
+            this.battlegroundButtonP1.UseVisualStyleBackColor = true;
+            this.battlegroundButtonP1.Click += new System.EventHandler(this.battlegroundButtonP1_Click);
+            // 
+            // splitter1
+            // 
+            this.splitter1.Location = new System.Drawing.Point(0, 0);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(4, 722);
+            this.splitter1.TabIndex = 0;
+            this.splitter1.TabStop = false;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(21, 672);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(660, 44);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "В бой!";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(949, 527);
-            this.Controls.Add(this.DropOnTheFieldButtonP2);
-            this.Controls.Add(this.DropOnTheFieldButtonP1);
-            this.Controls.Add(this.HeroesOnTheFieldP2);
-            this.Controls.Add(this.HeroesOnTheFieldP1);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(1386, 726);
+            this.Controls.Add(this.battlegroundP2);
+            this.Controls.Add(this.battlegroundP1);
+            this.Controls.Add(this.amountHealtNexusP2);
+            this.Controls.Add(this.textOfNexusP2);
+            this.Controls.Add(this.amountManaP2);
+            this.Controls.Add(this.textOfManaP2);
+            this.Controls.Add(this.amountHealtNexusP1);
+            this.Controls.Add(this.textOfNexusP1);
+            this.Controls.Add(this.attackButtonP2);
+            this.Controls.Add(this.HeroesOnFieldButtonP1);
+            this.Controls.Add(this.amountManaP1);
+            this.Controls.Add(this.textOfManaP1);
+            this.Controls.Add(this.DropOnFieldButtonP2);
+            this.Controls.Add(this.HandDeckButtonP1);
+            this.Controls.Add(this.HeroesOnFieldP2);
+            this.Controls.Add(this.HeroesOnFieldP1);
             this.Controls.Add(this.RoundСounter);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.ImageP1);
             this.Controls.Add(this.HandDeckP2);
             this.Controls.Add(this.HandDeckP1);
+            this.Controls.Add(this.splitContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.Text = "Shrek : Card game";
             ((System.ComponentModel.ISupportInitialize)(this.ImageP1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -184,9 +375,25 @@
         private PictureBox pictureBox1;
         private Label RoundСounter;
         private Label label1;
-        private ComboBox HeroesOnTheFieldP1;
-        private ComboBox HeroesOnTheFieldP2;
-        private Button DropOnTheFieldButtonP1;
-        private Button DropOnTheFieldButtonP2;
+        private ComboBox HeroesOnFieldP1;
+        private ComboBox HeroesOnFieldP2;
+        private Button HandDeckButtonP1;
+        private Button DropOnFieldButtonP2;
+        private Label textOfManaP1;
+        private Label amountManaP1;
+        private Button HeroesOnFieldButtonP1;
+        private Button attackButtonP2;
+        private Label amountHealtNexusP1;
+        private Label textOfNexusP1;
+        private Label amountHealtNexusP2;
+        private Label textOfNexusP2;
+        private Label amountManaP2;
+        private Label textOfManaP2;
+        private ComboBox battlegroundP1;
+        private ComboBox battlegroundP2;
+        private SplitContainer splitContainer1;
+        private Splitter splitter1;
+        private Button battlegroundButtonP1;
+        private Button button2;
     }
 }

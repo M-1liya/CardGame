@@ -18,20 +18,31 @@ namespace CardGame.Assets
         }
         public void Start(Dictionary<string, Player> Players)
         {
-            cardDistribution(Players);
+            distributionPlayersCards(Players);
+            resetPlayersMana(Players);
         }
-        public void cardDistribution(Dictionary<string, Player> Players)
+        public void distributionPlayersCards(Dictionary<string, Player> Players)
         {
             foreach (var player in Players)
                 for (int i = 0; i < 5; i++)
-                    player.Value.getHandCard.Add(_deck.GetCard());
+                    player.Value.HandCard.Add(_deck.Cards);
         }
-        public int getCurrentRound => _currentRound;
-        public int getTurnOrder => _turnOrder;
-        public void setCurrentRound(int currentRound) { this._currentRound = currentRound; }
-        public void resetTurnOrder(int countPlayers) { 
-            this._turnOrder = (_turnOrder >= countPlayers) ? 1: ++_turnOrder; 
+        public void resetPlayersMana(Dictionary<string, Player> Players)
+        {
+            foreach (var player in Players)
+                    player.Value.Mana = _currentRound;
         }
+        public int CurrentRound
+        {
+            get => _currentRound;
+            set => _currentRound = value;
+        }
+        public int TurnOrder
+        {
+            get => _turnOrder;
+            set => _turnOrder = (_turnOrder >= value) ? 1 : ++_turnOrder;
+        }
+
     }
 }
 
