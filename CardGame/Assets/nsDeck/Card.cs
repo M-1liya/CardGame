@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CardGame.Assets.nsDeck
 {
+    [Serializable]
     public abstract class Card: ICloneable
     {
         protected int _cost;

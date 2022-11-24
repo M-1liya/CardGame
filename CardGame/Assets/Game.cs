@@ -10,7 +10,6 @@ namespace CardGame.Assets
     public static class Game
     {
         private static int _currentRound = 1;
-        private static Deck _deck;
         public static void Start(Dictionary<string, Player> Players)
         {
             distributionPlayersCards(Players.Values.ToList());

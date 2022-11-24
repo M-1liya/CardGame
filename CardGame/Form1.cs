@@ -1,6 +1,6 @@
 using CardGame.Assets;
 using CardGame.Assets.nsDeck;
-using CardGame.Tests;
+using Newtonsoft.Json;
 using System.Security.Cryptography.Pkcs;
 using System.Text.Json;
 
@@ -18,7 +18,7 @@ namespace CardGame
         public Form1()
         {
             InitializeComponent();
-
+            //RerenderList(HeroesOnFieldP1, new List<Card> { p });
             Game.Start(Players);
             ChangeTextRoundÑounter($"Ðàóíä {Game.CurrentRound}");
             RenderPlayersData(Players);
@@ -26,8 +26,7 @@ namespace CardGame
 
             foreach (var player in Players)
                 RerenderList((ComboBox)this.Controls["HandDeck" + player.Key], player.Value.HandCard);
-
-
+            //RerenderList(HeroesOnFieldP1, deserialize(HeroesOnFieldP1));
         }
         /// <summary>
         /// <para>
@@ -102,7 +101,9 @@ namespace CardGame
             RenderPlayersData(Players);
             player.removeHandCard(selectedItemHandDeck); //Óáðàëè âûáðàííóþ êàðòó
             transferItem(HandDeck, HeroesOnField, selectedItemHandDeck);
-            
+            //serialize(HeroesOnField);
+            player.removeHandCard(selectedItemHandDeck);
+            player.addCardsOnField(selectedItemHandDeck);
         }
         private void HeroesOnFieldButton_Click(object sender, EventArgs e)
         {
@@ -115,6 +116,9 @@ namespace CardGame
 
             attackButton.Enabled = false;
             transferItem(HeroesOnField, battleground, selectedItemHeroesOnField.Value);
+            Players[keyPlayer].removeCardsOnField(selectedItemHeroesOnField.Value);
+            Players[keyPlayer].addCardOnBattleground(selectedItemHeroesOnField.Value);
+
         }
         private void EnableComponents(string[] componentsNames, bool enable)
         {
@@ -199,6 +203,38 @@ namespace CardGame
                 component.Items.Clear();
                 component.ResetText();
             }
+        }
+    
+        public void serialize(ComboBox component)
+        {
+            JsonSerializerSettings settings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.All
+            };
+            string strJson = JsonConvert.SerializeObject(Players, settings);
+            //Dictionary<string, Player> obj = JsonConvert.DeserializeObject<Dictionary<string, Player>>(strJson, settings);
+            List<Card> cards = new List<Card>();
+            foreach (dynamic item in component.Items)
+                cards.Add(item.Value);
+            File.WriteAllText($"{component.Name}.json", JsonConvert.SerializeObject(cards, settings));
+        }
+        public List<Card> deserialize(ComboBox component)
+        {
+            JsonSerializerSettings settings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.All,
+            };
+            string strJson = "";
+            try
+            {
+                using (StreamReader readtext = new StreamReader($"{component.Name}.json"))
+                { strJson = readtext.ReadLine(); }
+            }
+            catch (System.IO.FileNotFoundException ex)
+            {
+                return null;
+            }
+            return JsonConvert.DeserializeObject<List<Card>>(strJson, settings);
         }
     }
 }

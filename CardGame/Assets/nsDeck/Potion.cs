@@ -7,6 +7,7 @@ using static System.Windows.Forms.Design.AxImporter;
 
 namespace CardGame.Assets.nsDeck
 {
+    [Serializable]
     public class Potion : Card
     {
         private int _effect;

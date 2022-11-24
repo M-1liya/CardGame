@@ -12,6 +12,8 @@ namespace CardGame.Assets
         public enum EBattleStatus { Attack = 1, Protection };
         private List<Card> _handCard;
         private List<Card> _cardsOnField;
+        private List<Card> _cardsOnBattleground;
+
 
         private int _healthNexus;
         private int _mana;
@@ -21,6 +23,9 @@ namespace CardGame.Assets
             _healthNexus = heatNexus;
             _mana = mana;
             _handCard = new List<Card>();
+            _cardsOnField = new List<Card>();
+            _cardsOnBattleground = new List<Card>();
+
             _battleStatus = battleStatus;
         }
 
@@ -31,9 +36,14 @@ namespace CardGame.Assets
         public List<Card> HandCard => _handCard;
         public void addHandCard(Card card) { _handCard.Add(card); }
         public void removeHandCard(Card card) { _handCard.Remove(card); }
+
         public List<Card> CardsOnField => _cardsOnField;
         public void addCardsOnField(Card card) { _handCard.Add(card); }
         public void removeCardsOnField(Card card) { _handCard.Remove(card); }
+
+        public List<Card> CardsOnBattleground => _cardsOnBattleground;
+        public void addCardOnBattleground(Card card) { _cardsOnBattleground.Add(card); }
+        public void removeCardOnBattleground(Card card) { _cardsOnBattleground.Remove(card); }
         public int HealthNexus
         {
             get => _healthNexus;
