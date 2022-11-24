@@ -35,13 +35,12 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.RoundСounter = new System.Windows.Forms.Label();
             this.HeroesOnFieldP1 = new System.Windows.Forms.ComboBox();
-            this.HeroesOnFieldP2 = new System.Windows.Forms.ComboBox();
             this.HandDeckButtonP1 = new System.Windows.Forms.Button();
-            this.DropOnFieldButtonP2 = new System.Windows.Forms.Button();
+            this.HandDeckButtonP2 = new System.Windows.Forms.Button();
             this.textOfManaP1 = new System.Windows.Forms.Label();
             this.amountManaP1 = new System.Windows.Forms.Label();
             this.HeroesOnFieldButtonP1 = new System.Windows.Forms.Button();
-            this.attackButtonP2 = new System.Windows.Forms.Button();
+            this.HeroesOnFieldButtonP2 = new System.Windows.Forms.Button();
             this.amountHealtNexusP1 = new System.Windows.Forms.Label();
             this.textOfNexusP1 = new System.Windows.Forms.Label();
             this.amountHealtNexusP2 = new System.Windows.Forms.Label();
@@ -50,16 +49,11 @@
             this.textOfManaP2 = new System.Windows.Forms.Label();
             this.battlegroundP1 = new System.Windows.Forms.ComboBox();
             this.battlegroundP2 = new System.Windows.Forms.ComboBox();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.HeroesOnFieldP2 = new System.Windows.Forms.ComboBox();
             this.battlegroundButtonP1 = new System.Windows.Forms.Button();
-            this.splitter1 = new System.Windows.Forms.Splitter();
-            this.button2 = new System.Windows.Forms.Button();
+            this.battlegroundButtonP2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ImageP1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // HandDeckP1
@@ -127,16 +121,6 @@
             this.HeroesOnFieldP1.TabIndex = 7;
             this.HeroesOnFieldP1.SelectedIndexChanged += new System.EventHandler(this.HeroesOnField_SelectedIndexChanged);
             // 
-            // HeroesOnFieldP2
-            // 
-            this.HeroesOnFieldP2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
-            this.HeroesOnFieldP2.FormattingEnabled = true;
-            this.HeroesOnFieldP2.Location = new System.Drawing.Point(708, 198);
-            this.HeroesOnFieldP2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.HeroesOnFieldP2.Name = "HeroesOnFieldP2";
-            this.HeroesOnFieldP2.Size = new System.Drawing.Size(313, 228);
-            this.HeroesOnFieldP2.TabIndex = 8;
-            // 
             // HandDeckButtonP1
             // 
             this.HandDeckButtonP1.Enabled = false;
@@ -149,17 +133,17 @@
             this.HandDeckButtonP1.UseVisualStyleBackColor = true;
             this.HandDeckButtonP1.Click += new System.EventHandler(this.HandDeckButton_Click);
             // 
-            // DropOnFieldButtonP2
+            // HandDeckButtonP2
             // 
-            this.DropOnFieldButtonP2.Enabled = false;
-            this.DropOnFieldButtonP2.Location = new System.Drawing.Point(1061, 417);
-            this.DropOnFieldButtonP2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.DropOnFieldButtonP2.Name = "DropOnFieldButtonP2";
-            this.DropOnFieldButtonP2.Size = new System.Drawing.Size(315, 46);
-            this.DropOnFieldButtonP2.TabIndex = 10;
-            this.DropOnFieldButtonP2.Text = "Вывести на поле";
-            this.DropOnFieldButtonP2.UseVisualStyleBackColor = true;
-            this.DropOnFieldButtonP2.Click += new System.EventHandler(this.HeroesOnFieldButton_Click);
+            this.HandDeckButtonP2.Enabled = false;
+            this.HandDeckButtonP2.Location = new System.Drawing.Point(1061, 417);
+            this.HandDeckButtonP2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.HandDeckButtonP2.Name = "HandDeckButtonP2";
+            this.HandDeckButtonP2.Size = new System.Drawing.Size(315, 46);
+            this.HandDeckButtonP2.TabIndex = 10;
+            this.HandDeckButtonP2.Text = "Вывести на поле";
+            this.HandDeckButtonP2.UseVisualStyleBackColor = true;
+            this.HandDeckButtonP2.Click += new System.EventHandler(this.HandDeckButton_Click);
             // 
             // textOfManaP1
             // 
@@ -190,16 +174,17 @@
             this.HeroesOnFieldButtonP1.UseVisualStyleBackColor = true;
             this.HeroesOnFieldButtonP1.Click += new System.EventHandler(this.HeroesOnFieldButton_Click);
             // 
-            // attackButtonP2
+            // HeroesOnFieldButtonP2
             // 
-            this.attackButtonP2.Enabled = false;
-            this.attackButtonP2.Location = new System.Drawing.Point(708, 417);
-            this.attackButtonP2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.attackButtonP2.Name = "attackButtonP2";
-            this.attackButtonP2.Size = new System.Drawing.Size(313, 46);
-            this.attackButtonP2.TabIndex = 16;
-            this.attackButtonP2.Text = "Пропустить ход";
-            this.attackButtonP2.UseVisualStyleBackColor = true;
+            this.HeroesOnFieldButtonP2.Enabled = false;
+            this.HeroesOnFieldButtonP2.Location = new System.Drawing.Point(708, 417);
+            this.HeroesOnFieldButtonP2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.HeroesOnFieldButtonP2.Name = "HeroesOnFieldButtonP2";
+            this.HeroesOnFieldButtonP2.Size = new System.Drawing.Size(313, 46);
+            this.HeroesOnFieldButtonP2.TabIndex = 16;
+            this.HeroesOnFieldButtonP2.Text = "Пропустить ход";
+            this.HeroesOnFieldButtonP2.UseVisualStyleBackColor = true;
+            this.HeroesOnFieldButtonP2.Click += new System.EventHandler(this.HeroesOnFieldButton_Click);
             // 
             // amountHealtNexusP1
             // 
@@ -272,64 +257,45 @@
             this.battlegroundP2.Size = new System.Drawing.Size(661, 173);
             this.battlegroundP2.TabIndex = 26;
             // 
-            // splitContainer1
+            // HeroesOnFieldP2
             // 
-            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.splitContainer1.Cursor = System.Windows.Forms.Cursors.VSplit;
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.splitContainer1.Panel1.Controls.Add(this.battlegroundButtonP1);
-            this.splitContainer1.Panel1.Controls.Add(this.splitter1);
-            this.splitContainer1.Panel1.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.splitContainer1.Panel1.Tag = "";
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.splitContainer1.Panel2.Controls.Add(this.button2);
-            this.splitContainer1.Panel2.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.splitContainer1.Panel2.Tag = "";
-            this.splitContainer1.Size = new System.Drawing.Size(1386, 726);
-            this.splitContainer1.SplitterDistance = 688;
-            this.splitContainer1.TabIndex = 27;
+            this.HeroesOnFieldP2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.HeroesOnFieldP2.FormattingEnabled = true;
+            this.HeroesOnFieldP2.Location = new System.Drawing.Point(708, 196);
+            this.HeroesOnFieldP2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.HeroesOnFieldP2.Name = "HeroesOnFieldP2";
+            this.HeroesOnFieldP2.Size = new System.Drawing.Size(313, 213);
+            this.HeroesOnFieldP2.TabIndex = 27;
+            this.HeroesOnFieldP2.SelectedIndexChanged += new System.EventHandler(this.HeroesOnField_SelectedIndexChanged);
             // 
             // battlegroundButtonP1
             // 
-            this.battlegroundButtonP1.Location = new System.Drawing.Point(17, 672);
+            this.battlegroundButtonP1.Location = new System.Drawing.Point(12, 672);
             this.battlegroundButtonP1.Name = "battlegroundButtonP1";
-            this.battlegroundButtonP1.Size = new System.Drawing.Size(654, 44);
-            this.battlegroundButtonP1.TabIndex = 1;
-            this.battlegroundButtonP1.Text = "В бой!";
+            this.battlegroundButtonP1.Size = new System.Drawing.Size(661, 42);
+            this.battlegroundButtonP1.TabIndex = 28;
+            this.battlegroundButtonP1.Text = "button1";
             this.battlegroundButtonP1.UseVisualStyleBackColor = true;
-            this.battlegroundButtonP1.Click += new System.EventHandler(this.battlegroundButtonP1_Click);
+            this.battlegroundButtonP1.Click += new System.EventHandler(this.battlegroundButton_Click);
             // 
-            // splitter1
+            // battlegroundButtonP2
             // 
-            this.splitter1.Location = new System.Drawing.Point(0, 0);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(4, 722);
-            this.splitter1.TabIndex = 0;
-            this.splitter1.TabStop = false;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(21, 672);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(660, 44);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "В бой!";
-            this.button2.UseVisualStyleBackColor = true;
+            this.battlegroundButtonP2.Location = new System.Drawing.Point(715, 672);
+            this.battlegroundButtonP2.Name = "battlegroundButtonP2";
+            this.battlegroundButtonP2.Size = new System.Drawing.Size(661, 42);
+            this.battlegroundButtonP2.TabIndex = 29;
+            this.battlegroundButtonP2.Text = "button2";
+            this.battlegroundButtonP2.UseVisualStyleBackColor = true;
+            this.battlegroundButtonP2.Click += new System.EventHandler(this.battlegroundButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1386, 726);
+            this.Controls.Add(this.battlegroundButtonP2);
+            this.Controls.Add(this.battlegroundButtonP1);
+            this.Controls.Add(this.HeroesOnFieldP2);
             this.Controls.Add(this.battlegroundP2);
             this.Controls.Add(this.battlegroundP1);
             this.Controls.Add(this.amountHealtNexusP2);
@@ -338,30 +304,24 @@
             this.Controls.Add(this.textOfManaP2);
             this.Controls.Add(this.amountHealtNexusP1);
             this.Controls.Add(this.textOfNexusP1);
-            this.Controls.Add(this.attackButtonP2);
+            this.Controls.Add(this.HeroesOnFieldButtonP2);
             this.Controls.Add(this.HeroesOnFieldButtonP1);
             this.Controls.Add(this.amountManaP1);
             this.Controls.Add(this.textOfManaP1);
-            this.Controls.Add(this.DropOnFieldButtonP2);
+            this.Controls.Add(this.HandDeckButtonP2);
             this.Controls.Add(this.HandDeckButtonP1);
-            this.Controls.Add(this.HeroesOnFieldP2);
             this.Controls.Add(this.HeroesOnFieldP1);
             this.Controls.Add(this.RoundСounter);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.ImageP1);
             this.Controls.Add(this.HandDeckP2);
             this.Controls.Add(this.HandDeckP1);
-            this.Controls.Add(this.splitContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.Text = "Shrek : Card game";
             ((System.ComponentModel.ISupportInitialize)(this.ImageP1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -376,13 +336,12 @@
         private Label RoundСounter;
         private Label label1;
         private ComboBox HeroesOnFieldP1;
-        private ComboBox HeroesOnFieldP2;
         private Button HandDeckButtonP1;
-        private Button DropOnFieldButtonP2;
+        private Button HandDeckButtonP2;
         private Label textOfManaP1;
         private Label amountManaP1;
         private Button HeroesOnFieldButtonP1;
-        private Button attackButtonP2;
+        private Button HeroesOnFieldButtonP2;
         private Label amountHealtNexusP1;
         private Label textOfNexusP1;
         private Label amountHealtNexusP2;
@@ -391,9 +350,8 @@
         private Label textOfManaP2;
         private ComboBox battlegroundP1;
         private ComboBox battlegroundP2;
-        private SplitContainer splitContainer1;
-        private Splitter splitter1;
+        private ComboBox HeroesOnFieldP2;
         private Button battlegroundButtonP1;
-        private Button button2;
+        private Button battlegroundButtonP2;
     }
 }

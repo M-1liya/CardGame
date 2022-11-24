@@ -2,6 +2,7 @@ using CardGame.Assets;
 using CardGame.Assets.nsDeck;
 using CardGame.Tests;
 using System.Security.Cryptography.Pkcs;
+using System.Text.Json;
 
 namespace CardGame
 {
@@ -12,19 +13,16 @@ namespace CardGame
             { "P1", new Player(Player.EBattleStatus.Attack) },
             { "P2", new Player(Player.EBattleStatus.Protection) },
         };
-        private Game game = new Game();
-        private Deck decks = new Deck();
-        string[] PlayerComponents = { "HandDeck", "HeroesOnField" };
+        string[] PlayerComponents = { "HandDeck", "HeroesOnField", "battlegroundButton", "HandDeckButton", "HeroesOnFieldButton" };
 
         public Form1()
         {
             InitializeComponent();
 
-
-            game.Start(Players);
-            ChangeTextRoundСounter($"Раунд {game.CurrentRound}");
+            Game.Start(Players);
+            ChangeTextRoundСounter($"Раунд {Game.CurrentRound}");
             RenderPlayersData(Players);
-            EnableComponentsForTurnOrderPlayer(PlayerComponents, game, Players, Player.EBattleStatus.Attack);
+            EnableComponentsForTurnOrderPlayer(PlayerComponents, Players, Player.EBattleStatus.Attack);
 
             foreach (var player in Players)
                 RerenderList((ComboBox)this.Controls["HandDeck" + player.Key], player.Value.HandCard);
@@ -77,7 +75,7 @@ namespace CardGame
             ComboBox? HandDeck = sender as ComboBox;
             string keyPlayer = HandDeck.Name.Replace("HandDeck", "");
             var selectedItemHandDeck = (HandDeck.SelectedItem as dynamic).Value; // <=> HandDeck.selectedItem
-            SelectedIndexChanged(HandDeck, "HandDeck", Players[keyPlayer].DropOnField(selectedItemHandDeck));
+            SelectedIndexChanged(HandDeck, "HandDeck", Players[keyPlayer].IsDropOnField(selectedItemHandDeck));
         }
         private void HeroesOnField_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -100,9 +98,7 @@ namespace CardGame
             var HeroesOnField = (ComboBox)this.Controls["HeroesOnField" + keyPlayer];
             var selectedItemHandDeck = (HandDeck.SelectedItem as dynamic).Value;
             var player = Players[keyPlayer];
-
-            //game.resetTurnOrder(Players.Count);
-            //EnableComponentsForTurnOrderPlayer(PlayerComponents, game, Players);
+            player.Mana -= selectedItemHandDeck.Cost;
             RenderPlayersData(Players);
             player.removeHandCard(selectedItemHandDeck); //Убрали выбранную карту
             transferItem(HandDeck, HeroesOnField, selectedItemHandDeck);
@@ -142,7 +138,7 @@ namespace CardGame
                 cloneComponentNames[i] += str;
             return cloneComponentNames;
         }
-        private void EnableComponentsForTurnOrderPlayer(string[] componentNames, Game game, Dictionary<string, Player> players, Player.EBattleStatus turnOrder)
+        private void EnableComponentsForTurnOrderPlayer(string[] componentNames, Dictionary<string, Player> players, Player.EBattleStatus turnOrder)
         {
             foreach (var player in players)
             {
@@ -155,7 +151,7 @@ namespace CardGame
             RoundСounter.Text = text;
         }
 
-        private void battlegroundButtonP1_Click(object sender, EventArgs e)
+        private void battlegroundButton_Click(object sender, EventArgs e)
         {
             Button? attackButton = sender as Button;
 
@@ -163,10 +159,46 @@ namespace CardGame
             var player = Players[keyPlayer];
             if (player.BattleStatus == Player.EBattleStatus.Attack)
             {
-                EnableComponentsForTurnOrderPlayer(PlayerComponents, game, Players, Player.EBattleStatus.Protection);
+                EnableComponentsForTurnOrderPlayer(PlayerComponents, Players, Player.EBattleStatus.Protection);
                 attackButton.Enabled = false;
             }
+            else
+            {
+                Dictionary<Player, List<Card>> playersAttackCards = new Dictionary<Player, List<Card>>();
+                foreach (var Player in Players)
+                {
+                    playersAttackCards.Add(Player.Value, new List<Card>());
+                    foreach (dynamic item in ((ComboBox)this.Controls["battleground" + Player.Key]).Items)
+                        playersAttackCards[Player.Value].Add(item.Value);
+                }
 
+                Game.gameFight(playersAttackCards);
+                ChangeTextRoundСounter($"Раунд {Game.CurrentRound}");
+                RenderPlayersData(Players); // Обновляем данные игроков
+                
+                //Переносим карты победителя на персональное поле
+                var listDataCards = playersAttackCards.Values.ToList();
+                for (int i = 0; i < listDataCards.Count; i++)
+                    foreach (var card in listDataCards[i])
+                        transferItem((ComboBox)this.Controls["battlegroundP" + (i + 1)], (ComboBox)this.Controls["HeroesOnFieldP" + (i + 1)], card);
+
+                ClearBattleground();
+                Game.ChangeBattleStatus(Players);// Меняем боевые статусы игроков
+                EnableComponentsForTurnOrderPlayer(PlayerComponents, Players, Player.EBattleStatus.Attack); // Смена хода игрока
+
+
+            }
+
+        }
+
+        public void ClearBattleground()
+        {
+            foreach (var player in Players)
+            {
+                ComboBox component = (ComboBox)this.Controls["battleground" + player.Key];
+                component.Items.Clear();
+                component.ResetText();
+            }
         }
     }
 }

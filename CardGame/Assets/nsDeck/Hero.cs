@@ -8,26 +8,43 @@ namespace CardGame.Assets.nsDeck
 {
     public class Hero : Card
     {
-        private int _hp;
+        private int _health;
         private int _damage;
-        private TypeHero _typeHero;
-        public Hero(TypeCard typeCard, int cardCost, int cardDamage, TypeHero typeHero, int cartHP)
+        private ETypeHero _typeHero;
+        public Hero(ETypeCard typeCard, int cardCost, int cardDamage, ETypeHero typeHero, int cardHealth)
             : base(typeCard, cardCost)
         {
             this._typeHero = typeHero;
             this._damage = cardDamage;
-            this._hp = cartHP;
+            this._health = cardHealth;
         }
 
-        public int HP // Нужно поменять на heatpoint
+        protected Hero(Hero hero)
+            : base(hero)
         {
-            get => _hp; set => _hp = value;
+            this._typeHero = hero.TypeHero;
+            this._damage = hero.Damage;
+            this._health = hero.Health;
         }
-        public enum TypeHero { Dragon, Princess, Shrek, Donkey, Knight, osel }
-        public int getDamage => _damage;
-        public int getCost => _cost;
-        public TypeHero GetTypeHero => _typeHero;
-        public override string ToString() => $"({getCost}) {GetTypeHero} Атака: {getDamage}  HP: {HP}";
-
+        public int Health
+        {
+            get => _health;
+            set => _health = value;
+        }
+        public enum ETypeHero { Dragon, Princess, Shrek, Donkey, Knight }
+        public int Damage
+        {
+            get => _damage;
+            set => _damage = value;
+        }
+        public ETypeHero TypeHero{
+            get => _typeHero;
+            set => _typeHero = value;
+        }
+        public override string ToString() => $"({Cost}) {TypeHero} Атака: {Damage}  HP: {Health}";
+        public override object Clone()
+        {
+            return new Hero(this);
+        }
     }
 }

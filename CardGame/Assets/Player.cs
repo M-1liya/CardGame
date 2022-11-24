@@ -11,6 +11,8 @@ namespace CardGame.Assets
     {
         public enum EBattleStatus { Attack = 1, Protection };
         private List<Card> _handCard;
+        private List<Card> _cardsOnField;
+
         private int _healthNexus;
         private int _mana;
         private EBattleStatus _battleStatus;
@@ -22,13 +24,16 @@ namespace CardGame.Assets
             _battleStatus = battleStatus;
         }
 
-       public bool DropOnField(Card playerCard)
+       public bool IsDropOnField(Card playerCard)
         {
             return (playerCard.Cost <= _mana) ? true : false;
         }
         public List<Card> HandCard => _handCard;
         public void addHandCard(Card card) { _handCard.Add(card); }
         public void removeHandCard(Card card) { _handCard.Remove(card); }
+        public List<Card> CardsOnField => _cardsOnField;
+        public void addCardsOnField(Card card) { _handCard.Add(card); }
+        public void removeCardsOnField(Card card) { _handCard.Remove(card); }
         public int HealthNexus
         {
             get => _healthNexus;

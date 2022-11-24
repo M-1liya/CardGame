@@ -10,26 +10,45 @@ namespace CardGame.Assets.nsDeck
     public class Potion : Card
     {
         private int _effect;
-        private TypePotion _typePotion;
+        private Hero.ETypeHero _hero;
+        private ETypePotion _typePotion;
 
-        public Potion(TypeCard typeCard ,int cardCost, int cardEffect, TypePotion typePotion)
+        public Potion(ETypeCard typeCard ,int cardCost, int cardEffect, ETypePotion typePotion, Hero.ETypeHero hero)
             : base(typeCard, cardCost)
         {
-            this._effect = (typePotion == Potion.TypePotion.Damage) ? -cardEffect : cardEffect;
-            this._cost = cardCost;
-            this._typeCard = typeCard;
+            this._effect = cardEffect;
             this._typePotion = typePotion;
+            this._hero = hero;
         }
-
-        public enum TypePotion { Health, Damage }
-        public TypePotion GetTypePotion => _typePotion;
-        public int Cost => _cost;
-        public int Effect => _effect;
-
+        protected Potion(Potion potion)
+            : base(potion)
+        {
+            this._effect = potion.Effect;
+            this._typePotion = potion.TypePotion;
+            this._hero = potion.Hero;
+        }
+        public enum ETypePotion { Health, Damage }
+        public ETypePotion TypePotion {
+            get => _typePotion;
+            set => _typePotion = value;
+        }
+        public int Effect {
+            get => _effect;
+            set => _effect = value;
+        }
+        public Hero.ETypeHero Hero
+        {
+            get => _hero;
+            set => this._hero = value;
+        }
         public override string ToString() 
         {
-            string statusEffect = (Effect > 0) ? "+" : "";
-            return $"({Cost}) {GetTypePotion} Эффект: {statusEffect + Effect} HP";
+            string statusEffect = (TypePotion == ETypePotion.Health) ? "+" : "-";
+            return $"({Cost}) {TypePotion} Эффект: {statusEffect + Effect} HP";
+        }
+        public override object Clone()
+        {
+            return new Potion(this);
         }
     }
 }

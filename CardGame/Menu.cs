@@ -23,5 +23,10 @@ namespace CardGame
             form.ShowDialog();
             this.Close();
         }
+
+        private void Menu_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
