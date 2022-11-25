@@ -182,7 +182,7 @@
             this.HeroesOnFieldButtonP2.Name = "HeroesOnFieldButtonP2";
             this.HeroesOnFieldButtonP2.Size = new System.Drawing.Size(313, 46);
             this.HeroesOnFieldButtonP2.TabIndex = 16;
-            this.HeroesOnFieldButtonP2.Text = "Пропустить ход";
+            this.HeroesOnFieldButtonP2.Text = "Отправить в битву";
             this.HeroesOnFieldButtonP2.UseVisualStyleBackColor = true;
             this.HeroesOnFieldButtonP2.Click += new System.EventHandler(this.HeroesOnFieldButton_Click);
             // 
@@ -274,7 +274,7 @@
             this.battlegroundButtonP1.Name = "battlegroundButtonP1";
             this.battlegroundButtonP1.Size = new System.Drawing.Size(661, 42);
             this.battlegroundButtonP1.TabIndex = 28;
-            this.battlegroundButtonP1.Text = "button1";
+            this.battlegroundButtonP1.Text = "В бой!";
             this.battlegroundButtonP1.UseVisualStyleBackColor = true;
             this.battlegroundButtonP1.Click += new System.EventHandler(this.battlegroundButton_Click);
             // 
@@ -284,7 +284,7 @@
             this.battlegroundButtonP2.Name = "battlegroundButtonP2";
             this.battlegroundButtonP2.Size = new System.Drawing.Size(661, 42);
             this.battlegroundButtonP2.TabIndex = 29;
-            this.battlegroundButtonP2.Text = "button2";
+            this.battlegroundButtonP2.Text = "В бой!";
             this.battlegroundButtonP2.UseVisualStyleBackColor = true;
             this.battlegroundButtonP2.Click += new System.EventHandler(this.battlegroundButton_Click);
             // 

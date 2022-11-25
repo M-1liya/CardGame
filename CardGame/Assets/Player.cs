@@ -13,37 +13,29 @@ namespace CardGame.Assets
         private List<Card> _handCard;
         private List<Card> _cardsOnField;
         private List<Card> _cardsOnBattleground;
-
+        private bool _move;
 
         private int _healthNexus;
         private int _mana;
         private EBattleStatus _battleStatus;
-        public Player(EBattleStatus battleStatus, int heatNexus = 20, int mana = 1)
+        public Player(EBattleStatus battleStatus, int heatNexus = 20, int mana = 1, bool move = false)
         {
             _healthNexus = heatNexus;
             _mana = mana;
             _handCard = new List<Card>();
             _cardsOnField = new List<Card>();
             _cardsOnBattleground = new List<Card>();
-
             _battleStatus = battleStatus;
+            _move = move;
         }
 
-       public bool IsDropOnField(Card playerCard)
+        public bool IsDropOnField(Card playerCard)
         {
             return (playerCard.Cost <= _mana) ? true : false;
         }
         public List<Card> HandCard => _handCard;
-        public void addHandCard(Card card) { _handCard.Add(card); }
-        public void removeHandCard(Card card) { _handCard.Remove(card); }
-
         public List<Card> CardsOnField => _cardsOnField;
-        public void addCardsOnField(Card card) { _handCard.Add(card); }
-        public void removeCardsOnField(Card card) { _handCard.Remove(card); }
-
         public List<Card> CardsOnBattleground => _cardsOnBattleground;
-        public void addCardOnBattleground(Card card) { _cardsOnBattleground.Add(card); }
-        public void removeCardOnBattleground(Card card) { _cardsOnBattleground.Remove(card); }
         public int HealthNexus
         {
             get => _healthNexus;
@@ -53,6 +45,11 @@ namespace CardGame.Assets
         {
             get => _mana;
             set => _mana = value;
+        }
+        public bool Move
+        {
+            get => _move;
+            set => _move = value;
         }
         public EBattleStatus BattleStatus
         {

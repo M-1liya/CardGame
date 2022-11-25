@@ -12,7 +12,7 @@ namespace CardGame.Assets.nsDeck
         private List<Card> cards = new List<Card>()
         {
             //Герои
-            new Hero(Card.ETypeCard.Hero, 1, 2, Hero.ETypeHero.Knight, 5),
+            new Hero(Card.ETypeCard.Hero, 1, 20, Hero.ETypeHero.Knight, 5),
             new Hero(Card.ETypeCard.Hero, 1, 4, Hero.ETypeHero.Dragon, 10),
             new Hero(Card.ETypeCard.Hero, 1, 3, Hero.ETypeHero.Shrek, 3),
             new Hero(Card.ETypeCard.Hero, 1, 5, Hero.ETypeHero.Donkey, 2),
@@ -29,7 +29,6 @@ namespace CardGame.Assets.nsDeck
                 return (Hero)card.Clone();
             else
                 return (Potion)card.Clone();
-            //return (cards[random.Next(0, cards.Count)] is Hero) ? (Hero)cards[random.Next(0, cards.Count)].Clone(): (Potion)cards[random.Next(0, cards.Count)].Clone();
         }
 
     }

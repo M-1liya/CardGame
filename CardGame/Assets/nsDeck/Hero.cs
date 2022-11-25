@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace CardGame.Assets.nsDeck
 {
-    [Serializable]
     public class Hero : Card
     {
         private int _health;

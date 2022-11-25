@@ -30,7 +30,7 @@ namespace CardGame.Assets
                     player.Mana = _currentRound;
         }
 
-        public static Dictionary<Player, List<Card>> gameFight(Dictionary<Player, List<Card>> DataAttack)
+        /*public static Dictionary<Player, List<Card>> gameFight(Dictionary<Player, List<Card>> DataAttack)
         {
             foreach(var item in DataAttack)
                 foreach (var card in new List<Card>(item.Value))
@@ -47,6 +47,31 @@ namespace CardGame.Assets
             resetPlayersMana(DataAttack.Keys.ToList());
             return DataAttack;
         }
+*/
+        public static Dictionary<string, Player> fight(Dictionary<string, Player> Players)
+        {
+            foreach (var player in Players)
+                foreach (var card in new List<Card>(player.Value.CardsOnBattleground))
+                    if (card is Potion)
+                        castPotion(player.Value.CardsOnBattleground, (Potion)card);
+            List<List<Card>> DataAttack = new List<List<Card>>();
+            foreach (var player in Players)
+                DataAttack.Add(player.Value.CardsOnBattleground);
+
+            fightAlgoritm(DataAttack);
+
+            foreach (var player in Players)
+            {
+                if (player.Value.CardsOnBattleground.Count == 0)
+                    player.Value.HealthNexus = attackNexus(player.Value.HealthNexus, DataAttack);
+                if (player.Value.HealthNexus <= 0)
+                    return null;
+            }
+
+            CurrentRound += 1;
+            resetPlayersMana(Players.Values.ToList());
+            return Players;
+        }
         public static int attackNexus(int nexus, List<List<Card>> DataAttack)
         {
             foreach (var item in DataAttack)
@@ -55,7 +80,7 @@ namespace CardGame.Assets
                         nexus -= ((Hero)card).Damage;
             return nexus;
         }
-        public static void fight(List< List<Card> > DataAttack)
+        public static void fightAlgoritm(List< List<Card> > DataAttack)
         {
             foreach (var cards in DataAttack)
                 if (cards.Count == 0)
@@ -70,7 +95,7 @@ namespace CardGame.Assets
                     DataAttack[playerCards].Remove(DataAttack[playerCards][0]);
             }
 
-            fight(DataAttack);
+            fightAlgoritm(DataAttack);
         }
 
         public static List<Hero> duel(Hero heroFirst, Hero heroSecond)
@@ -98,18 +123,17 @@ namespace CardGame.Assets
                             case Potion.ETypePotion.Health:
                                 ((Hero)card).Health += potion.Effect; break;
                         }
-                        Cards.Remove(potion);
                         break;
                     }
                 }
             }
+            Cards.Remove(potion);
         }
         public static int CurrentRound
         {
             get => _currentRound;
             set => _currentRound = value;
         }
-
         public static void ChangeBattleStatus(Dictionary<string, Player> Players)
         {
             foreach (var player in Players)

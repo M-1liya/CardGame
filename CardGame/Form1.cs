@@ -1,11 +1,13 @@
 using CardGame.Assets;
 using CardGame.Assets.nsDeck;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Security.Cryptography.Pkcs;
 using System.Text.Json;
 
 namespace CardGame
 {
+
     public partial class Form1 : Form
     {
         private Dictionary<string, Player> Players = new Dictionary<string, Player>()
@@ -18,15 +20,32 @@ namespace CardGame
         public Form1()
         {
             InitializeComponent();
-            //RerenderList(HeroesOnFieldP1, new List<Card> { p });
-            Game.Start(Players);
-            ChangeTextRoundСounter($"Раунд {Game.CurrentRound}");
-            RenderPlayersData(Players);
-            EnableComponentsForTurnOrderPlayer(PlayerComponents, Players, Player.EBattleStatus.Attack);
+
+            if (File.Exists("Players.json"))
+            {
+                Players = deserialize<Dictionary<string, Player>>("Players");
+                foreach (var player in Players)
+                {
+                    RerenderList((ComboBox)this.Controls["HeroesOnField" + player.Key], player.Value.CardsOnField);
+                    RerenderList((ComboBox)this.Controls["battleground" + player.Key], player.Value.CardsOnBattleground);
+                    if (player.Value.Move == true)
+                        ChangeTurnOut(PlayerComponents, Players, 
+                        player.Value.BattleStatus == Player.EBattleStatus.Attack ? Player.EBattleStatus.Protection : Player.EBattleStatus.Attack);
+                }
+            }
+            else
+            {
+                Game.Start(Players);
+                ChangeTurnOut(PlayerComponents, Players, Player.EBattleStatus.Attack);
+            }
+            if (File.Exists("Round.json"))
+                Game.CurrentRound = deserialize<int>("Round");
 
             foreach (var player in Players)
                 RerenderList((ComboBox)this.Controls["HandDeck" + player.Key], player.Value.HandCard);
-            //RerenderList(HeroesOnFieldP1, deserialize(HeroesOnFieldP1));
+            ChangeTextRoundСounter($"Раунд {Game.CurrentRound}");
+            RenderPlayersData(Players);
+
         }
         /// <summary>
         /// <para>
@@ -39,7 +58,6 @@ namespace CardGame
         /// <param name="comboBox">Игрок, который имееет HandCard</param>
         private void RerenderList(ComboBox comboBox, List<Card> cards)
         {
-            //comboBox.Items.Clear();
             comboBox.DisplayMember = "Text";
             comboBox.ValueMember = "Value";
             foreach (Card card in cards)
@@ -67,8 +85,7 @@ namespace CardGame
                 this.Controls["amountMana" + player.Key].Text = player.Value.Mana.ToString();
             }
         }
-        
-        
+       
         private void HandDeck_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox? HandDeck = sender as ComboBox;
@@ -87,7 +104,7 @@ namespace CardGame
             var button = this.Controls[nameComponent + "Button" + keyPlayer];
             button.Enabled = enable;
         }
-        
+       
         private void HandDeckButton_Click(object sender, EventArgs e)
         {
             Button? DropOnField = sender as Button; // Кнопка с которой произошёл клик
@@ -97,13 +114,14 @@ namespace CardGame
             var HeroesOnField = (ComboBox)this.Controls["HeroesOnField" + keyPlayer];
             var selectedItemHandDeck = (HandDeck.SelectedItem as dynamic).Value;
             var player = Players[keyPlayer];
+
             player.Mana -= selectedItemHandDeck.Cost;
             RenderPlayersData(Players);
-            player.removeHandCard(selectedItemHandDeck); //Убрали выбранную карту
+            player.HandCard.Remove(selectedItemHandDeck);
+            player.CardsOnField.Add(selectedItemHandDeck);
+
             transferItem(HandDeck, HeroesOnField, selectedItemHandDeck);
-            //serialize(HeroesOnField);
-            player.removeHandCard(selectedItemHandDeck);
-            player.addCardsOnField(selectedItemHandDeck);
+            serialize<Dictionary<string, Player>>(Players, "Players");
         }
         private void HeroesOnFieldButton_Click(object sender, EventArgs e)
         {
@@ -116,10 +134,48 @@ namespace CardGame
 
             attackButton.Enabled = false;
             transferItem(HeroesOnField, battleground, selectedItemHeroesOnField.Value);
-            Players[keyPlayer].removeCardsOnField(selectedItemHeroesOnField.Value);
-            Players[keyPlayer].addCardOnBattleground(selectedItemHeroesOnField.Value);
+            Players[keyPlayer].CardsOnField.Remove(selectedItemHeroesOnField.Value);
+            Players[keyPlayer].CardsOnBattleground.Add(selectedItemHeroesOnField.Value);
+            serialize<Dictionary<string, Player>>(Players, "Players");
+        }
+        private void battlegroundButton_Click(object sender, EventArgs e)
+        {
+            Button? attackButton = sender as Button;
+
+            string keyPlayer = attackButton.Name.Replace("battlegroundButton", "");
+            var player = Players[keyPlayer];
+            Players[keyPlayer].Move = true;
+            if (player.BattleStatus == Player.EBattleStatus.Attack)
+            {
+                ChangeTurnOut(PlayerComponents, Players, Player.EBattleStatus.Protection);
+                attackButton.Enabled = false;
+            }
+            else
+            {
+                if (Game.fight(Players) == null)
+                    MessageBox.Show("END");
+                
+                ChangeTextRoundСounter($"Раунд {Game.CurrentRound}");
+                serialize<int>(Game.CurrentRound, "Round");
+                RenderPlayersData(Players); // Обновляем данные игроков
+                
+                //Переносим карты победителя на персональное поле
+                foreach (var Player in Players)
+                {
+                    RerenderList((ComboBox)this.Controls["HeroesOnField" + Player.Key], Player.Value.CardsOnBattleground);
+                    foreach (var card in Player.Value.CardsOnBattleground)
+                        Player.Value.CardsOnField.Add(card);
+                    Player.Value.CardsOnBattleground.Clear();
+                    Player.Value.Move = false;
+                }
+                ClearBattleground();
+                Game.ChangeBattleStatus(Players);// Меняем боевые статусы игроков
+                ChangeTurnOut(PlayerComponents, Players, Player.EBattleStatus.Attack); // Смена хода игрока
+            }
+                serialize<Dictionary<string, Player>>(Players, "Players");
 
         }
+
         private void EnableComponents(string[] componentsNames, bool enable)
         {
             foreach (var componentName in componentsNames)
@@ -130,7 +186,7 @@ namespace CardGame
                 }
                 catch (System.NullReferenceException ex)
                 {
-                   MessageBox.Show($"Компонента с именем: {componentName} не существует");
+                    MessageBox.Show($"Компонента с именем: {componentName} не существует");
                 }
             }
         }
@@ -142,7 +198,7 @@ namespace CardGame
                 cloneComponentNames[i] += str;
             return cloneComponentNames;
         }
-        private void EnableComponentsForTurnOrderPlayer(string[] componentNames, Dictionary<string, Player> players, Player.EBattleStatus turnOrder)
+        private void ChangeTurnOut(string[] componentNames, Dictionary<string, Player> players, Player.EBattleStatus turnOrder)
         {
             foreach (var player in players)
             {
@@ -150,51 +206,11 @@ namespace CardGame
                 EnableComponents(AppendStringInLast(componentNames, player.Key), enable);
             }
         }
+        
         public void ChangeTextRoundСounter(string text)
         {
             RoundСounter.Text = text;
         }
-
-        private void battlegroundButton_Click(object sender, EventArgs e)
-        {
-            Button? attackButton = sender as Button;
-
-            string keyPlayer = attackButton.Name.Replace("battlegroundButton", "");
-            var player = Players[keyPlayer];
-            if (player.BattleStatus == Player.EBattleStatus.Attack)
-            {
-                EnableComponentsForTurnOrderPlayer(PlayerComponents, Players, Player.EBattleStatus.Protection);
-                attackButton.Enabled = false;
-            }
-            else
-            {
-                Dictionary<Player, List<Card>> playersAttackCards = new Dictionary<Player, List<Card>>();
-                foreach (var Player in Players)
-                {
-                    playersAttackCards.Add(Player.Value, new List<Card>());
-                    foreach (dynamic item in ((ComboBox)this.Controls["battleground" + Player.Key]).Items)
-                        playersAttackCards[Player.Value].Add(item.Value);
-                }
-
-                Game.gameFight(playersAttackCards);
-                ChangeTextRoundСounter($"Раунд {Game.CurrentRound}");
-                RenderPlayersData(Players); // Обновляем данные игроков
-                
-                //Переносим карты победителя на персональное поле
-                var listDataCards = playersAttackCards.Values.ToList();
-                for (int i = 0; i < listDataCards.Count; i++)
-                    foreach (var card in listDataCards[i])
-                        transferItem((ComboBox)this.Controls["battlegroundP" + (i + 1)], (ComboBox)this.Controls["HeroesOnFieldP" + (i + 1)], card);
-
-                ClearBattleground();
-                Game.ChangeBattleStatus(Players);// Меняем боевые статусы игроков
-                EnableComponentsForTurnOrderPlayer(PlayerComponents, Players, Player.EBattleStatus.Attack); // Смена хода игрока
-
-
-            }
-
-        }
-
         public void ClearBattleground()
         {
             foreach (var player in Players)
@@ -205,36 +221,18 @@ namespace CardGame
             }
         }
     
-        public void serialize(ComboBox component)
+        public void serialize<T>(T obj, string filename)
         {
-            JsonSerializerSettings settings = new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.All
-            };
-            string strJson = JsonConvert.SerializeObject(Players, settings);
-            //Dictionary<string, Player> obj = JsonConvert.DeserializeObject<Dictionary<string, Player>>(strJson, settings);
-            List<Card> cards = new List<Card>();
-            foreach (dynamic item in component.Items)
-                cards.Add(item.Value);
-            File.WriteAllText($"{component.Name}.json", JsonConvert.SerializeObject(cards, settings));
+            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+            File.WriteAllText(@$"{filename}.json", JsonConvert.SerializeObject(obj, settings));
         }
-        public List<Card> deserialize(ComboBox component)
+        public T deserialize<T>(string filename)
         {
-            JsonSerializerSettings settings = new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.All,
-            };
+            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All, };
             string strJson = "";
-            try
-            {
-                using (StreamReader readtext = new StreamReader($"{component.Name}.json"))
-                { strJson = readtext.ReadLine(); }
-            }
-            catch (System.IO.FileNotFoundException ex)
-            {
-                return null;
-            }
-            return JsonConvert.DeserializeObject<List<Card>>(strJson, settings);
+            try{ strJson = File.ReadAllText(@$"{filename}.json"); }
+            catch (System.IO.FileNotFoundException ex) {  }
+            return JsonConvert.DeserializeObject<T>(strJson, settings); ;
         }
     }
 }

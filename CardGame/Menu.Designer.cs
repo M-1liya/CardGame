@@ -54,6 +54,7 @@
             this.ContinueGameBtn.TabIndex = 1;
             this.ContinueGameBtn.Text = "Продолжить";
             this.ContinueGameBtn.UseVisualStyleBackColor = true;
+            this.ContinueGameBtn.Click += new System.EventHandler(this.ContinueGameBtn_Click);
             // 
             // Menu
             // 
