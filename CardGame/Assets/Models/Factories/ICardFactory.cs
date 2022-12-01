@@ -2,7 +2,7 @@
 
 namespace CardGame.Assets.Model.Factories
 {
-    internal interface CardFactory
+    internal interface ICardFactory
     {
         abstract Card create(Enum type);
     }

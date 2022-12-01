@@ -3,7 +3,7 @@ using CardGame.Assets.Model.Cards.CardType;
 
 namespace CardGame.Assets.Model.Factories
 {
-    internal class PotionFactory : CardFactory
+    internal class PotionFactory : ICardFactory
     {
         public Card create(Enum type)
         {

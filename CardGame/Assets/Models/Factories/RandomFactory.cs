@@ -5,15 +5,15 @@ namespace CardGame.Assets.Model.Factories
 {
     public static class RandomFactory
     {
-        private static CardFactory[] Factories = new CardFactory[]{ new HeroFactory(), new PotionFactory() };
+        private static ICardFactory[] Factories = new ICardFactory[]{ new HeroFactory(), new PotionFactory() };
         private static Random Random = new Random();
         public static  Card create()
         {
-            CardFactory factory = Factories[Random.Next(Factories.Length)];
+            ICardFactory factory = Factories[Random.Next(Factories.Length)];
             Enum type = getType(factory);
             return factory.create(type);
         }
-        private static Enum getType(CardFactory factory)
+        private static Enum getType(ICardFactory factory)
         {
             return factory switch
             {
