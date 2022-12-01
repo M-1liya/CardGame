@@ -1,9 +1,7 @@
 using CardGame.Assets;
-using CardGame.Assets.nsDeck;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Security.Cryptography.Pkcs;
-using System.Text.Json;
+using CardGame.Assets.Model.Cards;
+using CardGame.Assets.Models;
+
 
 namespace CardGame
 {
@@ -12,8 +10,8 @@ namespace CardGame
     {
         private Dictionary<string, Player> Players = new Dictionary<string, Player>()
         {
-            { "P1", new Player(Player.EBattleStatus.Attack) },
-            { "P2", new Player(Player.EBattleStatus.Protection) },
+            { "P1", new Player(BattleStatus.ATTACK) },
+            { "P2", new Player(BattleStatus.PROTECTION) },
         };
         string[] PlayerComponents = { "HandDeck", "HeroesOnField", "battlegroundButton", "HandDeckButton", "HeroesOnFieldButton" };
 
@@ -23,26 +21,26 @@ namespace CardGame
 
             if (File.Exists("Players.json"))
             {
-                Players = deserialize<Dictionary<string, Player>>("Players");
+                Players = Serialization.deserialize<Dictionary<string, Player>>("Players");
                 foreach (var player in Players)
                 {
-                    RerenderList((ComboBox)this.Controls["HeroesOnField" + player.Key], player.Value.CardsOnField);
-                    RerenderList((ComboBox)this.Controls["battleground" + player.Key], player.Value.CardsOnBattleground);
+                    RerenderList((ComboBox)this.Controls["HeroesOnField" + player.Key], player.Value.Deck.OnField);
+                    RerenderList((ComboBox)this.Controls["battleground" + player.Key], player.Value.Deck.OnBattleground);
                     if (player.Value.Move == true)
                         ChangeTurnOut(PlayerComponents, Players, 
-                        player.Value.BattleStatus == Player.EBattleStatus.Attack ? Player.EBattleStatus.Protection : Player.EBattleStatus.Attack);
+                        player.Value.BattleStatus == BattleStatus.ATTACK ? BattleStatus.PROTECTION : BattleStatus.ATTACK);
                 }
             }
             else
             {
                 Game.Start(Players);
-                ChangeTurnOut(PlayerComponents, Players, Player.EBattleStatus.Attack);
+                ChangeTurnOut(PlayerComponents, Players, BattleStatus.ATTACK);
             }
             if (File.Exists("Round.json"))
-                Game.CurrentRound = deserialize<int>("Round");
+                Game.CurrentRound = Serialization.deserialize<int>("Round");
 
             foreach (var player in Players)
-                RerenderList((ComboBox)this.Controls["HandDeck" + player.Key], player.Value.HandCard);
+                RerenderList((ComboBox)this.Controls["HandDeck" + player.Key], player.Value.Deck.OnHand);
             ChangeTextRoundСounter($"Раунд {Game.CurrentRound}");
             RenderPlayersData(Players);
 
@@ -117,11 +115,10 @@ namespace CardGame
 
             player.Mana -= selectedItemHandDeck.Cost;
             RenderPlayersData(Players);
-            player.HandCard.Remove(selectedItemHandDeck);
-            player.CardsOnField.Add(selectedItemHandDeck);
+            player.Deck.OnHand.Remove(selectedItemHandDeck);
+            player.Deck.OnField.Add(selectedItemHandDeck);
 
             transferItem(HandDeck, HeroesOnField, selectedItemHandDeck);
-            serialize<Dictionary<string, Player>>(Players, "Players");
         }
         private void HeroesOnFieldButton_Click(object sender, EventArgs e)
         {
@@ -134,9 +131,8 @@ namespace CardGame
 
             attackButton.Enabled = false;
             transferItem(HeroesOnField, battleground, selectedItemHeroesOnField.Value);
-            Players[keyPlayer].CardsOnField.Remove(selectedItemHeroesOnField.Value);
-            Players[keyPlayer].CardsOnBattleground.Add(selectedItemHeroesOnField.Value);
-            serialize<Dictionary<string, Player>>(Players, "Players");
+            Players[keyPlayer].Deck.OnField.Remove(selectedItemHeroesOnField.Value);
+            Players[keyPlayer].Deck.OnBattleground.Add(selectedItemHeroesOnField.Value);
         }
         private void battlegroundButton_Click(object sender, EventArgs e)
         {
@@ -145,35 +141,32 @@ namespace CardGame
             string keyPlayer = attackButton.Name.Replace("battlegroundButton", "");
             var player = Players[keyPlayer];
             Players[keyPlayer].Move = true;
-            if (player.BattleStatus == Player.EBattleStatus.Attack)
+            if (player.BattleStatus == BattleStatus.ATTACK)
             {
-                ChangeTurnOut(PlayerComponents, Players, Player.EBattleStatus.Protection);
+                ChangeTurnOut(PlayerComponents, Players, BattleStatus.PROTECTION);
                 attackButton.Enabled = false;
             }
             else
             {
-                if (Game.fight(Players) == null)
+                if (Fight.start(Players) == null)
                     MessageBox.Show("END");
                 
                 ChangeTextRoundСounter($"Раунд {Game.CurrentRound}");
-                serialize<int>(Game.CurrentRound, "Round");
                 RenderPlayersData(Players); // Обновляем данные игроков
                 
                 //Переносим карты победителя на персональное поле
                 foreach (var Player in Players)
                 {
-                    RerenderList((ComboBox)this.Controls["HeroesOnField" + Player.Key], Player.Value.CardsOnBattleground);
-                    foreach (var card in Player.Value.CardsOnBattleground)
-                        Player.Value.CardsOnField.Add(card);
-                    Player.Value.CardsOnBattleground.Clear();
+                    RerenderList((ComboBox)this.Controls["HeroesOnField" + Player.Key], Player.Value.Deck.OnBattleground);
+                    foreach (var card in Player.Value.Deck.OnBattleground)
+                        Player.Value.Deck.OnField.Add(card);
+                    Player.Value.Deck.OnBattleground.Clear();
                     Player.Value.Move = false;
                 }
                 ClearBattleground();
                 Game.ChangeBattleStatus(Players);// Меняем боевые статусы игроков
-                ChangeTurnOut(PlayerComponents, Players, Player.EBattleStatus.Attack); // Смена хода игрока
+                ChangeTurnOut(PlayerComponents, Players, BattleStatus.ATTACK); // Смена хода игрока
             }
-                serialize<Dictionary<string, Player>>(Players, "Players");
-
         }
 
         private void EnableComponents(string[] componentsNames, bool enable)
@@ -198,7 +191,7 @@ namespace CardGame
                 cloneComponentNames[i] += str;
             return cloneComponentNames;
         }
-        private void ChangeTurnOut(string[] componentNames, Dictionary<string, Player> players, Player.EBattleStatus turnOrder)
+        private void ChangeTurnOut(string[] componentNames, Dictionary<string, Player> players, BattleStatus turnOrder)
         {
             foreach (var player in players)
             {
@@ -220,19 +213,11 @@ namespace CardGame
                 component.ResetText();
             }
         }
-    
-        public void serialize<T>(T obj, string filename)
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
-            File.WriteAllText(@$"{filename}.json", JsonConvert.SerializeObject(obj, settings));
-        }
-        public T deserialize<T>(string filename)
-        {
-            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All, };
-            string strJson = "";
-            try{ strJson = File.ReadAllText(@$"{filename}.json"); }
-            catch (System.IO.FileNotFoundException ex) {  }
-            return JsonConvert.DeserializeObject<T>(strJson, settings); ;
+            Serialization.serialize<int>(Game.CurrentRound, "Round");
+            Serialization.serialize<Dictionary<string, Player>>(Players, "Players");
         }
     }
 }

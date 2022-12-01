@@ -320,6 +320,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.Text = "Shrek : Card game";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.ImageP1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -334,7 +335,7 @@
         private PictureBox ImageP1;
         private PictureBox pictureBox1;
         private Label RoundСounter;
-        private Label label1;
+        //private Label label1;
         private ComboBox HeroesOnFieldP1;
         private Button HandDeckButtonP1;
         private Button HandDeckButtonP2;

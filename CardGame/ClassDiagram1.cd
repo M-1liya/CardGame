@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CardGame.Assets.nsDeck.Deck">
+    <Position X="2.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAgAAAAAAAAAAAEAAAQAAAAAAAA=</HashCode>
+      <FileName>Assets\nsDeck\Deck.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardGame.Assets.nsDeck.Hero">
+    <Position X="4.25" Y="3.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="CardGame.Assets.nsDeck.Hero.ETypeHero" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\nsDeck\Hero.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAACADAAAEAAAAEAAAAAAAgAAAAAAAAAAAIAAAAABA=</HashCode>
+      <FileName>Assets\nsDeck\Hero.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardGame.Assets.nsDeck.Potion">
+    <Position X="8.5" Y="3.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="CardGame.Assets.nsDeck.Potion.ETypePotion" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\nsDeck\Potion.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAiAAABEAAABAAAAAAAAAAAAAgAAAABAABA=</HashCode>
+      <FileName>Assets\nsDeck\Potion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardGame.Assets.nsDeck.Card">
+    <Position X="6.25" Y="1" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="CardGame.Assets.nsDeck.Card.ETypeCard" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\nsDeck\Card.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAgEAAAAABAAAAAAAAAAAACAAAAAADA=</HashCode>
+      <FileName>Assets\nsDeck\Card.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CardGame.Assets.Game">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAYAAAAAACIAAAAACEAAAQAAAEAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Assets\Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardGame.Assets.Player">
+    <Position X="0.5" Y="2.25" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="CardGame.Assets.Player.EBattleStatus" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Player.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AgAAAAAiAJAAAAAAEABIAAgAAAAAAAAAAABAMAIAAAA=</HashCode>
+      <FileName>Assets\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardGame.Form1" Collapsed="true">
+    <Position X="0.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAYAgAAwAKCkBFCAIgOAIAQCACAgAAAAQJdPAARgQAA=</HashCode>
+      <FileName>Form1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
