@@ -89,7 +89,7 @@ namespace CardGame
             ComboBox? HandDeck = sender as ComboBox;
             string keyPlayer = HandDeck.Name.Replace("HandDeck", "");
             var selectedItemHandDeck = (HandDeck.SelectedItem as dynamic).Value; // <=> HandDeck.selectedItem
-            SelectedIndexChanged(HandDeck, "HandDeck", Players[keyPlayer].IsDropOnField(selectedItemHandDeck));
+            SelectedIndexChanged(HandDeck, "HandDeck", Players[keyPlayer].IsCanPutCard(selectedItemHandDeck));
         }
         private void HeroesOnField_SelectedIndexChanged(object sender, EventArgs e)
         {

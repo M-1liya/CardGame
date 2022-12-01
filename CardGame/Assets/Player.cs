@@ -23,7 +23,7 @@ namespace CardGame.Assets
             _move = move;
         }
 
-        public bool IsDropOnField(Card playerCard)
+        public bool IsCanPutCard(Card playerCard)
         {
             return (playerCard.Cost <= _mana) ? true : false;
         }
