@@ -2,6 +2,7 @@
 using CardGame.Assets.Model.Cards;
 using CardGame.Assets.Models;
 using System.Collections.Generic;
+using System.Drawing.Text;
 
 namespace CardGame.Assets
 {
@@ -35,6 +36,8 @@ namespace CardGame.Assets
                 DefendPlayer.Deck.OnBattleground
             };
 
+
+
             if (DataAttack[0].Count == 0) return Players;
 
             FightAlgoritm(DataAttack);
@@ -42,21 +45,14 @@ namespace CardGame.Assets
             if (DefendPlayer.HealthNexus <= 0)
                 return null;
 
+
             return Players;
         }
 
-
-        public static int AttackNexus(int nexus, List<Card> CardsAttack)
-        {
-            foreach (var card in CardsAttack)
-            {
-                nexus -= ((Hero)card).Damage;
-            }
-            return nexus;
-        }
-
-
-        public static void FightAlgoritm(List<List<Card>> DataAttack)
+        //Теперь за один бой герои наносят по одному удару
+        //Наносит урон нексусу только атакующий
+        //при условии что его никто не блокирует 
+        private static void FightAlgoritm(List<List<Card>> DataAttack)
         {
             for(int i = 0; i < DataAttack[0].Count; i++)
             {
@@ -71,9 +67,23 @@ namespace CardGame.Assets
                 }
             }
 
+            DeleteDeadHero(DataAttack[0]);
+            DeleteDeadHero(DataAttack[1]);
+
+            void DeleteDeadHero(List<Card> Cards) 
+            {
+                List<Card> tmp = Cards;
+                foreach (var card in tmp)
+                {
+                    if (((Hero)card).Health <= 0)
+                    {
+                        Cards.Remove(card);
+                    }
+                }
+            }
         }
 
-        public static List<Card> Duel(Card heroA, Card heroD)
+        private static List<Card> Duel(Card heroA, Card heroD)
         {
             
             Hero AttackHero = (Hero)heroA;
@@ -84,8 +94,8 @@ namespace CardGame.Assets
 
             List <Card> res = new() 
             {
-                AttackHero.Health > 0 ? AttackHero : null,
-                DefendHero.Health > 0 ? DefendHero : null,
+                AttackHero,
+                DefendHero
             };
 
             return res;
