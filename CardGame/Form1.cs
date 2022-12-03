@@ -148,7 +148,7 @@ namespace CardGame
             }
             else
             {
-                if (Fight.start(Players) == null)
+                if (Fight.Start(Players) == null)
                     MessageBox.Show("END");
                 
                 ChangeTextRound—ounter($"–‡ÛÌ‰ {Game.CurrentRound}");
