@@ -5,15 +5,13 @@ namespace CardGame.Assets.Model.Cards
     public class Potion : Card
     {
         private int _effect;
-        private HeroType _hero;
         private PotionType _typePotion;
 
-        public Potion( int cardCost, int cardEffect, PotionType typePotion, HeroType hero)
+        public Potion( int cardCost, int cardEffect, PotionType typePotion)
             : base(cardCost)
         {
             _effect = cardEffect;
             _typePotion = typePotion;
-            _hero = hero;
         }
         public PotionType TypePotion
         {
@@ -25,15 +23,10 @@ namespace CardGame.Assets.Model.Cards
             get => _effect;
             set => _effect = value;
         }
-        public HeroType Hero
-        {
-            get => _hero;
-            set => _hero = value;
-        }
         public override string ToString()
         {
-            string statusEffect = TypePotion == PotionType.HEALTH ? "+" : "-";
-            return $"({Cost}) {TypePotion} Эффект: {statusEffect + Effect} HP";
+            //string statusEffect = TypePotion == PotionType.HEALTH ? "+" : "-";
+            return $"({Cost}) {TypePotion} Эффект: {Effect} HP";
         }
     }
 }

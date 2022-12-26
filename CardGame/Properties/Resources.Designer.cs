@@ -63,6 +63,16 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ATTACK {
+            get {
+                object obj = ResourceManager.GetObject("ATTACK", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap p1 {
             get {
                 object obj = ResourceManager.GetObject("p1", resourceCulture);
@@ -76,6 +86,16 @@ namespace CardGame.Properties {
         internal static System.Drawing.Bitmap p2 {
             get {
                 object obj = ResourceManager.GetObject("p2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PROTECTION {
+            get {
+                object obj = ResourceManager.GetObject("PROTECTION", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

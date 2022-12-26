@@ -1,9 +1,13 @@
-﻿using CardGame.Assets.Model.Cards;
+﻿using System;
+using CardGame.Assets.Model.Cards;
 
 namespace CardGame.Assets.Model.Factories
 {
-    internal interface ICardFactory
+    /// <summary>
+    ///  Фабрика игровых карт
+    /// </summary>
+    public interface ICardFactory
     {
-        abstract Card create(Enum type);
+        Card Create(Enum type);
     }
 }

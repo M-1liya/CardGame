@@ -1,19 +1,20 @@
-﻿using Newtonsoft.Json;
+﻿using System.IO;
+using Newtonsoft.Json;
 
 namespace CardGame.Assets
 {
     public static class Serialization
     {
-        public static void serialize<T>(T obj, string filename)
+        public static void serialize<T>(T obj, FileInfo file)
         {
             JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
-            File.WriteAllText(@$"{filename}.json", JsonConvert.SerializeObject(obj, settings));
+            File.WriteAllText(@$"{file.FullName}", JsonConvert.SerializeObject(obj, settings));
         }
-        public static T deserialize<T>(string filename)
+        public static T deserialize<T>(FileInfo file)
         {
             JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All, };
             string strJson = "";
-            try { strJson = File.ReadAllText(@$"{filename}.json"); }
+            try { strJson = File.ReadAllText(@$"{file.FullName}"); }
             catch (System.IO.FileNotFoundException ex) { }
             return JsonConvert.DeserializeObject<T>(strJson, settings); ;
         }

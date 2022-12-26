@@ -1,4 +1,6 @@
-﻿namespace CardGame.Assets.Model.Cards
+﻿using System.Collections.Generic;
+
+namespace CardGame.Assets.Model.Cards
 {
     public class Deck
     {

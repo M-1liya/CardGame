@@ -1,6 +1,6 @@
 ﻿namespace CardGame.Assets.Util
 {
-    internal class GameConst
+    public class GameConst
     {
         public const int MAX_COUNT_HANDDECK = 5;
 

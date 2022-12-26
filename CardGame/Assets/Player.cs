@@ -1,5 +1,5 @@
-﻿using CardGame.Assets.Model.Cards;
-using CardGame.Assets.Models;
+﻿using CardGame.Assets.Model;
+using CardGame.Assets.Model.Cards;
 using CardGame.Assets.Util;
 
 namespace CardGame.Assets
@@ -23,8 +23,14 @@ namespace CardGame.Assets
             _move = move;
         }
 
+        /// <summary>
+        /// Проверка можем ли мы положить карту на игровое поле игрока
+        /// </summary>
+        /// <param name="playerCard">Карта игрока</param>
+        /// <returns>true/false</returns>
         public bool IsCanPutCard(Card playerCard)
         {
+            if(playerCard== null) return false;
             return (playerCard.Cost <= _mana) ? true : false;
         }
         public Deck Deck

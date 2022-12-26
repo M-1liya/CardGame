@@ -52,8 +52,12 @@
             this.HeroesOnFieldP2 = new System.Windows.Forms.ComboBox();
             this.battlegroundButtonP1 = new System.Windows.Forms.Button();
             this.battlegroundButtonP2 = new System.Windows.Forms.Button();
+            this.BattleStatusP1 = new System.Windows.Forms.PictureBox();
+            this.BattleStatusP2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.ImageP1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BattleStatusP1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BattleStatusP2)).BeginInit();
             this.SuspendLayout();
             // 
             // HandDeckP1
@@ -288,11 +292,35 @@
             this.battlegroundButtonP2.UseVisualStyleBackColor = true;
             this.battlegroundButtonP2.Click += new System.EventHandler(this.battlegroundButton_Click);
             // 
+            // BattleStatusP1
+            // 
+            this.BattleStatusP1.Image = global::CardGame.Properties.Resources.ATTACK;
+            this.BattleStatusP1.Location = new System.Drawing.Point(267, 103);
+            this.BattleStatusP1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.BattleStatusP1.Name = "BattleStatusP1";
+            this.BattleStatusP1.Size = new System.Drawing.Size(47, 44);
+            this.BattleStatusP1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.BattleStatusP1.TabIndex = 30;
+            this.BattleStatusP1.TabStop = false;
+            // 
+            // BattleStatusP2
+            // 
+            this.BattleStatusP2.Image = global::CardGame.Properties.Resources.PROTECTION;
+            this.BattleStatusP2.Location = new System.Drawing.Point(974, 103);
+            this.BattleStatusP2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.BattleStatusP2.Name = "BattleStatusP2";
+            this.BattleStatusP2.Size = new System.Drawing.Size(47, 44);
+            this.BattleStatusP2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.BattleStatusP2.TabIndex = 31;
+            this.BattleStatusP2.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1386, 726);
+            this.Controls.Add(this.BattleStatusP2);
+            this.Controls.Add(this.BattleStatusP1);
             this.Controls.Add(this.battlegroundButtonP2);
             this.Controls.Add(this.battlegroundButtonP1);
             this.Controls.Add(this.HeroesOnFieldP2);
@@ -323,6 +351,8 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.ImageP1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BattleStatusP1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BattleStatusP2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -354,5 +384,7 @@
         private ComboBox HeroesOnFieldP2;
         private Button battlegroundButtonP1;
         private Button battlegroundButtonP2;
+        private PictureBox BattleStatusP1;
+        private PictureBox BattleStatusP2;
     }
 }

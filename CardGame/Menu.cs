@@ -19,11 +19,14 @@ namespace CardGame
 
         private void StartNewGameBtn_Click(object sender, EventArgs e)
         {
-            if (File.Exists("Players.json"))
-                File.Delete("Players.json");
+            string[] FilesName = { "Players.json", "Round.json" };
+            foreach (var fileName in FilesName)
+                if (File.Exists(fileName))
+                    File.Delete(fileName);
             Form1 form = new Form1();
             form.ShowDialog();
-            this.Hide();
+            this.Close();
+
         }
 
         private void Menu_Load(object sender, EventArgs e)
@@ -34,7 +37,7 @@ namespace CardGame
         {
             Form1 form = new Form1();
             form.ShowDialog();
-            this.Hide();
+            this.Close();
         }
     }
 }

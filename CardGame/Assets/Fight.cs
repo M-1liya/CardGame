@@ -1,104 +1,124 @@
-﻿
-using CardGame.Assets.Model.Cards;
-using CardGame.Assets.Models;
-using System.Collections.Generic;
-using System.Drawing.Text;
+﻿using CardGame.Assets.Model.Cards;
+using CardGame.Assets.Model.Cards.CardType;
+using CardGame.Assets.Models.Cards;
+using CardGame.Assets.Model;
 
 namespace CardGame.Assets
 {
     public static class Fight
     {
-        static Player? AttakPlayer;
-        static Player? DefendPlayer;
-        public static Dictionary<string, Player> Start(Dictionary<string, Player> Players)
+        static Dictionary<BattleStatus, Player?> FightPlayers;
+
+        /// <summary>
+        /// В этом методе происходит битва колод OnBattleGround
+        /// </summary>
+        /// <param name="Players">Словарь игроков</param>
+        /// <returns>Cписок игроков после битвы, либо null в случае проигрыша одного из игроков</returns>
+        public static List<Player>? Start(List<Player> Players)
         {
+            FightPlayers = new Dictionary<BattleStatus, Player?>();
+
             foreach (var player in Players)
+                FightPlayers[player.BattleStatus] = player;
+            
+            castPotion(Players);
+
+            var DataAttack = new Dictionary < DeckType, List<Card>>() 
             {
-
-                if (player.Value.BattleStatus == BattleStatus.ATTACK)
-                    AttakPlayer = player.Value;
-                else 
-                    DefendPlayer= player.Value;
-
-
-                foreach (var card in new List<Card>(player.Value.Deck.OnBattleground))
-                    if (card is Potion)
-                        Game.castPotion(player.Value.Deck.OnBattleground, (Potion)card);
-            }
-
-            if (AttakPlayer == null || DefendPlayer == null)
-                throw new Exception("Battle status of players must be different!");
-
-
-            List<List<Card>> DataAttack = new() 
-            { 
-                AttakPlayer.Deck.OnBattleground,
-                DefendPlayer.Deck.OnBattleground
+                { DeckType.ATTACKDECK, FightPlayers[BattleStatus.ATTACK].Deck.OnBattleground },
+                { DeckType.PROTECTION, FightPlayers[BattleStatus.PROTECTION].Deck.OnBattleground },
             };
 
+            DataAttack.Values.ToList().RemoveAll(item => item == null);
 
+            if (DataAttack[DeckType.ATTACKDECK].Count != 0)
+                FightAlgoritm(DataAttack);
 
-            if (DataAttack[0].Count == 0) return Players;
+            resetPlayersData(Players);
 
-            FightAlgoritm(DataAttack);
-
-            if (DefendPlayer.HealthNexus <= 0)
-                return null;
-
-
-            return Players;
+            return FightPlayers[BattleStatus.PROTECTION].HealthNexus <= 0 ? null : Players;
         }
 
-        //Теперь за один бой герои наносят по одному удару
-        //Наносит урон нексусу только атакующий
-        //при условии что его никто не блокирует 
-        private static void FightAlgoritm(List<List<Card>> DataAttack)
+        /// <summary>
+        /// Используется после битвы, чтобы обновить данные игроков
+        /// </summary>
+        /// <param name="Players">Список игроков</param>
+        private static void resetPlayersData(List<Player> Players)
         {
-            for(int i = 0; i < DataAttack[0].Count; i++)
+            Game.CurrentRound++;
+            Game.resetPlayersMana(Players);
+            Game.addCardToPlayer(Players);
+
+            foreach (var Player in Players)
             {
-                if (i > DataAttack[1].Count)
-                    DefendPlayer.HealthNexus -= ((Hero)DataAttack[0][i]).Damage;
+                foreach (var card in Player.Deck.OnBattleground)
+                    Player.Deck.OnField.Add(card);
+                Player.Deck.OnBattleground.Clear();
+                Player.Move = false;
+            }
+        }
+
+        /// <summary>
+        /// Алгоритм битвы => Карты игроков наносят по удару друг другу
+        /// Если у какой-либо из карт здоровье ниже 0, она удаляется
+        /// </summary>
+        /// <param name="DataAttack">Список колод на поле битвы</param>
+        private static void FightAlgoritm(Dictionary<DeckType, List<Card>> DataAttack)
+        {
+            for(int i = 0; i < DataAttack[DeckType.ATTACKDECK].Count; i++)
+            {
+                if (i > DataAttack[DeckType.PROTECTION].Count-1)
+                    FightPlayers[BattleStatus.PROTECTION].HealthNexus -= ((Hero)DataAttack[DeckType.ATTACKDECK][i]).Damage;
 
                 else
                 {
-                    List<Card> DuelRes =  Duel(DataAttack[0][i], DataAttack[1][i]);
-                    DataAttack[0][i] = DuelRes[0]; 
-                    DataAttack[1][i] = DuelRes[1]; 
+                    ((Hero)DataAttack[DeckType.ATTACKDECK][i]).Health -= ((Hero)DataAttack[DeckType.PROTECTION][i]).Damage;
+                    ((Hero)DataAttack[DeckType.PROTECTION][i]).Health -= ((Hero)DataAttack[DeckType.ATTACKDECK][i]).Damage;
                 }
             }
 
-            DeleteDeadHero(DataAttack[0]);
-            DeleteDeadHero(DataAttack[1]);
-
-            void DeleteDeadHero(List<Card> Cards) 
-            {
-                List<Card> tmp = Cards;
-                foreach (var card in tmp)
-                {
+            foreach(var Cards in DataAttack)
+                foreach(var card in new List<Card>(Cards.Value))
                     if (((Hero)card).Health <= 0)
-                    {
-                        Cards.Remove(card);
-                    }
-                }
+                        DataAttack[Cards.Key].Remove(card);
+        }
+        /// <summary>
+        /// Пробегает по картам и если находит карту заклинания, то применяет её
+        /// </summary>
+        /// <param name="Players">Список игроков</param>
+        public static void castPotion(List<Player> Players)
+        {
+            foreach (var player in Players)
+            {
+                foreach (var card in new List<Card>(player.Deck.OnBattleground))
+                    if (card is Potion)
+                        applyPotion(player.Deck.OnBattleground, (Potion)card);
             }
         }
+        /// <summary>
+        /// Пробегает по всем картам героев и применяем к ним заклинание
+        /// </summary>
+        /// <param name="Cards">Колода игрока</param>
+        /// <param name="potion">Карта заклинания</param>
 
-        private static List<Card> Duel(Card heroA, Card heroD)
+        public static void applyPotion(List<Card> Cards, Potion potion)
         {
-            
-            Hero AttackHero = (Hero)heroA;
-            Hero DefendHero = (Hero)heroD;
 
-            DefendHero.Health -= AttackHero.Damage;
-            AttackHero.Health -= DefendHero.Damage;
-
-            List <Card> res = new() 
+            foreach (var card in Cards)
             {
-                AttackHero,
-                DefendHero
-            };
-
-            return res;
+                if (card is Hero)
+                {
+                        switch (potion.TypePotion)
+                        {
+                            case PotionType.DAMAGE:
+                                ((Hero)card).Damage += potion.Effect; break;
+                            case PotionType.HEALTH:
+                                ((Hero)card).Health += potion.Effect; break;
+                        }
+                }
+            }
+            Cards.Remove(potion);
         }
+
     }
 }

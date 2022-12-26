@@ -8,7 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <PackageIcon>ShrekJPG-transformed.png</PackageIcon>
     <ApplicationIcon>images\ShrekICO.ico</ApplicationIcon>
-    <LangVersion>11.0</LangVersion>
+    <LangVersion>10.0</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
